@@ -1,5 +1,0 @@
-<Modules>
-  <Module PersistentId="835D2C93-FC52-4F56-99FC-DC0AAC3E84D9" ModuleId="MuonLab.Validation.Example" />
-  <Module PersistentId="0B48AFFA-3213-42DC-8B4F-4D1696C35412" ModuleId="MuonLab.Validation" />
-  <Module PersistentId="153980DB-6FDA-47F4-84A4-DB62739F00F7" ModuleId="MuonLab.Validation.Tests" />
-</Modules>

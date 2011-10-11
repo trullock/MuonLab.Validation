@@ -1,9 +1,0 @@
-E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation\obj\Debug\ResolveAssemblyReference.cache
-E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation\bin\Debug\MuonLab.Validation.dll
-E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation\bin\Debug\MuonLab.Validation.pdb
-E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation\obj\Debug\MuonLab.Validation.dll
-E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation\obj\Debug\MuonLab.Validation.pdb
-E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation\bin\Debug\nunit.framework.dll
-E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation\bin\Debug\nunit.mocks.dll
-E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation\bin\Debug\pnunit.framework.dll
-E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation\bin\Debug\nunit.framework.xml
