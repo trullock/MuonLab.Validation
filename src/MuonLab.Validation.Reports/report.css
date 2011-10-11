@@ -1,0 +1,118 @@
+﻿*
+{
+	margin: 0;
+	padding: 0;
+}
+
+html, body 
+{
+	height: 100%;
+}
+
+html, body, form, fieldset, input, select, textarea 
+{
+	font-size: 100.01%;
+}
+
+h1, h2, h3, h4, h5, h6,
+p,
+pre,
+blockquote,
+ul,
+ol,
+dl,
+address,
+.clear 
+{
+	font-weight: normal;
+	font-style: normal;
+	clear:both;
+}
+
+li
+{
+	list-style: none;
+}
+
+fieldset,
+img
+{ 
+	border: none;
+}
+
+input,
+select,
+textarea 
+{
+	outline: none;
+}
+
+body
+{
+	/* This sets the font size to 10px equivalent */
+	font-size: 0.625em;
+	font-family: Georgia, Garamond, Times New Roman, Serif;
+	color: #333;
+	padding: 2em;
+}
+
+h1
+{
+	font-size: 3em;
+	font-weight: bold;
+	font-style: italic;
+	margin-bottom: 1em;
+	color: #B8112A;
+}
+h2
+{
+	font-size: 2.6em;
+	font-weight: bold;
+	font-style: italic;
+	color: #FF5E19;
+}
+h3
+{
+	font-size: 2em;
+	font-weight: bold;
+	color: #F21133;
+}
+h4
+{
+	font-size: 1.6em;
+	font-weight: bold;
+	color: #333;
+	margin-top: 1em;
+}
+h5
+{
+	font-size: 1.4em;
+	font-weight: bold;
+	color: #555;
+	margin-bottom: 0.5em;
+}
+h5 span
+{
+	color: #3060C0;
+}
+p
+{
+	font-size: 1.4em;
+	margin-bottom: 1em;
+}
+p.fullName
+{
+	font-size: 1.2em;
+	margin-bottom: 2em;
+	color: #666;
+}
+ul
+{
+	padding-left: 3em;
+	margin-bottom: 1em;
+}
+
+ul li
+{
+
+}
