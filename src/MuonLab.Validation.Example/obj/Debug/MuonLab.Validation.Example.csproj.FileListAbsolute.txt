@@ -1,9 +1,7 @@
 E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation.Example\bin\MuonLab.Validation.Example.dll
 E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation.Example\bin\MuonLab.Validation.Example.pdb
-E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation.Example\bin\EntityFramework.dll
 E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation.Example\bin\MuonLab.Validation.dll
 E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation.Example\bin\MuonLab.Validation.pdb
-E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation.Example\bin\EntityFramework.xml
 E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation.Example\obj\Debug\ResolveAssemblyReference.cache
 E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation.Example\obj\Debug\MuonLab.Validation.Example.dll
 E:\Code\GitHub\MuonKit.Validation\src\MuonLab.Validation.Example\obj\Debug\MuonLab.Validation.Example.pdb

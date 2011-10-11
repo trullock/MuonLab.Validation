@@ -11,12 +11,12 @@ namespace MuonLab.Validation
 			return new PropertyCondition<TValue>(condition.Compile(), errorMessage);
 		}
 
-		public static ICondition<TValue> Satisfies<TValue>(this TValue self, IValidator<TValue> validator)
+		public static ChildValidationCondition<TValue> Satisfies<TValue>(this TValue self, IValidator<TValue> validator)
 		{
 			return new ChildValidationCondition<TValue>(validator);
 		}
 
-		public static ICondition<IList<TValue>> AllSatisfy<TValue>(this IList<TValue> self, IValidator<TValue> validator)
+		public static ChildListValidationCondition<TValue> AllSatisfy<TValue>(this IList<TValue> self, IValidator<TValue> validator)
 		{
 			return new ChildListValidationCondition<TValue>(validator);
 		}

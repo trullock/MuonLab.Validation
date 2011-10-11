@@ -1,6 +1,6 @@
 namespace MuonLab.Validation
 {
-	internal sealed class ChildValidationCondition<TValue> : ICondition<TValue>
+	public sealed class ChildValidationCondition<TValue> : ICondition<TValue>
 	{
 		public IValidator<TValue> Validator { get; protected set; }
 
