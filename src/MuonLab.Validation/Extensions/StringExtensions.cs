@@ -1,3 +1,4 @@
+using System;
 using System.Text.RegularExpressions;
 
 namespace MuonLab.Validation
@@ -129,6 +130,31 @@ namespace MuonLab.Validation
 		public static ICondition<string> Matches(this string self, Regex regex, string errorMessage)
 		{
 			return self.Satisfies(s => s != null ? regex.Match(s).Success : false, errorMessage);
+		}
+
+		/// <summary>
+		/// Ensure the property matches a value with the given string comparison
+		/// </summary>
+		/// <param name="self"></param>
+		/// <param name="value"></param>
+		/// <param name="comparison"></param>
+		/// <returns></returns>
+		public static ICondition<string> IsEqualTo(this string self, string value, StringComparison comparison)
+		{
+			return self.Satisfies(s => s != null ? s.Equals(value, comparison) : false, "{val} must be the same as {arg1}");
+		}
+
+		/// <summary>
+		/// Ensure the property matches a value with the given string comparison
+		/// </summary>
+		/// <param name="self"></param>
+		/// <param name="value">The value to be equal to</param>
+		/// <param name="comparison">The string comparison method</param>
+		/// <param name="errorMessage">The error message</param>
+		/// <returns></returns>
+		public static ICondition<string> IsEqualTo(this string self, string value, StringComparison comparison, string errorMessage)
+		{
+			return self.Satisfies(s => s != null ? s.Equals(value, comparison) : false, errorMessage);
 		}
 	}
 }
