@@ -1,4 +1,4 @@
-﻿name: MuonKit.Validation
+﻿name: MuonLab-Validation
 depends: openwrap anchored content
 depends: nunit
 
