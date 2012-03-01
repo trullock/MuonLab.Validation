@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{660F9A54-E768-4D75-A2AE-C6E28A1B3094}"
 	ProjectSection(SolutionItems) = preProject
 		..\MuonKit.Validation.wrapdesc = ..\MuonKit.Validation.wrapdesc
+		..\readme.md = ..\readme.md
 		..\version = ..\version
 	EndProjectSection
 EndProject

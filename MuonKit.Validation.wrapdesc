@@ -1,3 +1,5 @@
 ﻿name: MuonKit.Validation
 depends: openwrap anchored content
 depends: nunit
+
+build: msbuild;src\MuonLab.Validation\MuonLab.Validation.csproj
