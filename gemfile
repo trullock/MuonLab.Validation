@@ -1,8 +1,0 @@
-source "http://rubygems.org"
-
-gem "bozo", :git => "git@github.com:zopaUK/bozo.git"
-gem "bozo-scripts", :git => "git@github.com:zopaUK/bozo-scripts.git"
-
-gem "windows-pr"
-gem "win32console"
-gem "rainbow"
