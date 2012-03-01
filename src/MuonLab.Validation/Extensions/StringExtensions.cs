@@ -124,13 +124,24 @@ namespace MuonLab.Validation
 		/// </summary>
 		/// <param name="self"></param>
 		/// <param name="regex">The matching regex</param>
-		/// <param name="options">The Regex Options</param>
 		/// <param name="errorMessage">The associated error message</param>
 		/// <returns></returns>
 		public static ICondition<string> Matches(this string self, Regex regex, string errorMessage)
 		{
 			return self.Satisfies(s => s != null ? regex.Match(s).Success : false, errorMessage);
 		}
+
+		/// <summary>
+		/// Ensure the property matches a value with the given string comparison
+		/// </summary>
+		/// <param name="self"></param>
+		/// <param name="value"></param>
+		/// <returns></returns>
+		public static ICondition<string> IsEqualTo(this string self, string value)
+		{
+			return self.IsEqualTo(value, StringComparison.Ordinal);
+		}
+
 
 		/// <summary>
 		/// Ensure the property matches a value with the given string comparison

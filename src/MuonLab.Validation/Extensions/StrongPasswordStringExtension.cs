@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -32,33 +31,33 @@ namespace MuonLab.Validation
 							// Check length
 							if (s.Length < minimumLength)
 							{
-								this.ErrorMessage = getErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
+								this.ErrorMessage = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
 								return false;
 							}
 
 							// check case variation
-							if (requireCaseVariation && !validateRegex(s, @"(?=.*[a-z])(?=.*[A-Z])"))
+							if (requireCaseVariation && !ValidateRegex(s, @"(?=.*[a-z])(?=.*[A-Z])"))
 							{
-								this.ErrorMessage = getErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
+								this.ErrorMessage = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
 								return false;
 							}
-							else if (!requireCaseVariation && !validateRegex(s, @"(?=.*[a-zA-Z])"))
+							else if (!requireCaseVariation && !ValidateRegex(s, @"(?=.*[a-zA-Z])"))
 							{
-								this.ErrorMessage = getErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
+								this.ErrorMessage = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
 								return false;
 							}
 
 							// check numerics
-							if (requireNumeric && !validateRegex(s, @"(?=.*[0-9])"))
+							if (requireNumeric && !ValidateRegex(s, @"(?=.*[0-9])"))
 							{
-								this.ErrorMessage = getErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
+								this.ErrorMessage = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
 								return false;
 							}
 
 							// check presence of non alphanumeric
-							if (requireNonAlphanumeric && !validateRegex(s, @"(?=.*[^0-9a-zA-Z])"))
+							if (requireNonAlphanumeric && !ValidateRegex(s, @"(?=.*[^0-9a-zA-Z])"))
 							{
-								this.ErrorMessage = getErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
+								this.ErrorMessage = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
 								return false;
 							}
 						}
@@ -67,7 +66,7 @@ namespace MuonLab.Validation
 					};
 			}
 
-			private static string getErrorMessage(int minimumLength, bool requireCaseVariation, bool requireNumeric, bool requireNonAlphanumeric)
+			static string GetErrorMessage(int minimumLength, bool requireCaseVariation, bool requireNumeric, bool requireNonAlphanumeric)
 			{
 				IList<string> errors = new List<string>();
 				
@@ -97,7 +96,7 @@ namespace MuonLab.Validation
 				return errorMessage;
 			}
 
-			private static bool validateRegex(string input, string pattern)
+			static bool ValidateRegex(string input, string pattern)
 			{
 				return Regex.Match(input, pattern).Success;
 			}

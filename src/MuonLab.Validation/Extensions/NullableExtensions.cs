@@ -1,5 +1,3 @@
-using System;
-
 namespace MuonLab.Validation
 {
 	public static class NullableExtensions
