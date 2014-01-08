@@ -11,15 +11,15 @@ namespace MuonLab.Validation.Example.Controllers
 			return View("Index", new TestViewModel());
 		}
 
-	[AcceptVerbs(HttpVerbs.Post)]
-	public ActionResult Index(TestViewModel viewModel)
-	{
-		if (!ModelState.IsValid)
-			return this.View("Index", viewModel);
+		[AcceptVerbs(HttpVerbs.Post)]
+		public ActionResult Index(TestViewModel viewModel)
+		{
+			if (!ModelState.IsValid)
+				return this.View("Index", viewModel);
 
-		// do something
+			// do something
 
-		return View("Index", viewModel);
-	}
+			return View("Index", viewModel);
+		}
 	}
 }

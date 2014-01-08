@@ -11,6 +11,5 @@ namespace MuonLab.Validation
 
 	public interface IValidationRule
 	{
-		MethodCallExpression Condition { get; }
 	}
 }
