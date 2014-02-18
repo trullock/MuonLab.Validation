@@ -117,6 +117,21 @@ namespace MuonLab.Validation
 			this.vRules.Add(new ConditionalValidationRule<T, TValue>(whenCondition, conditionalRules));
 		}
 
+		protected void When(Func<bool> whenCondition, Action rules)
+		{
+			var otherRules = this.vRules;
+
+			this.vRules = new List<IValidationRule<T>>();
+
+			rules();
+
+			var conditionalRules = this.vRules;
+
+			this.vRules = otherRules;
+
+			this.vRules.Add(new ConditionalPredicateValidationRule<T>(whenCondition, conditionalRules));
+		}
+
 		protected void Any(Action rules)
 		{
 			var otherRules = this.vRules;

@@ -64,6 +64,7 @@
     <Compile Include="ChildListValidationCondition.cs" />
     <Compile Include="ChildValidationCondition.cs" />
     <Compile Include="ChildValidationRule.cs" />
+    <Compile Include="ConditionalPredicateValidationRule.cs" />
     <Compile Include="ConditionalValidationRule.cs" />
     <Compile Include="ChildListValidationRule.cs" />
     <Compile Include="AnyValidationRule.cs" />

@@ -106,6 +106,7 @@
     <Compile Include="when_validating_against_the_a_basic_property.cs" />
     <Compile Include="when_validating_against_the_a_nested_parameter_rule.cs" />
     <Compile Include="when_validating_against_the_parameter_with_no_property.cs" />
+    <Compile Include="when_validating_with_a_conditional_predicate.cs" />
     <Compile Include="when_validating_with_a_conditional_rule.cs" />
   </ItemGroup>
   <ItemGroup>
