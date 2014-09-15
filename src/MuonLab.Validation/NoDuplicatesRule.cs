@@ -9,85 +9,20 @@ namespace MuonLab.Validation
 	{
 		public static CollectionCondition<TItem, TCompare> DoesNotHaveDuplicates<TItem, TCompare>(this IList<TItem> self, Expression<Func<TItem, TCompare>> compareProperty)
 		{
-			return new CollectionCondition<TItem, TCompare>(self, compareProperty);
+			return self.DoesNotHaveDuplicates(compareProperty, "{val} must be unique");
 		}
 
-		public interface ICollectionCondition<TItem>
+		public static CollectionCondition<TItem, TCompare> DoesNotHaveDuplicates<TItem, TCompare>(this IList<TItem> self, Expression<Func<TItem, TCompare>> compareProperty, string errorMessage)
 		{
-			IEnumerable<Expression> GetViolations<T, TOuter>(Expression<Func<TOuter, T>> expression, Expression<Func<T, IList<TItem>>> propertyExpression);
-		}
-
-		public sealed class CollectionCondition<TItem, TCompare> : PropertyCondition<IList<TItem>>, ICollectionCondition<TItem>
-		{
-			readonly TItem[] values;
-			readonly Expression<Func<TItem, TCompare>> compareProperty;
-
-			public CollectionCondition(IEnumerable<TItem> values, Expression<Func<TItem, TCompare>> compareProperty) : base(null, null)
+			return new CollectionCondition<TItem, TCompare>(errorMessage, self, compareProperty, (list, item, getCompareValue) =>
 			{
-				this.values = values.ToArray();
-				this.compareProperty = compareProperty;
+				var propertyValue = getCompareValue(item);
 
-				this.ErrorMessage = "Duplicate value not allowed in field";
-			}
+				if (propertyValue == null)
+					return list.Any(x => !item.Equals(x) && getCompareValue(x) == null);
 
-			IList<int> GetDuplicateIndexes()
-			{
-				var duplicateIndexes = new List<int>();
-				var comparePropertyFunc = compareProperty.Compile();
-
-				for (var i = 0; i < values.Length; i++)
-				{
-					foreach (var val in values)
-					{
-						if (comparePropertyFunc(values[i]) == null)
-						{
-							if (!values[i].Equals(val) && comparePropertyFunc(val) == null)
-								duplicateIndexes.Add(i);
-							continue;
-						}
-
-						var property1 = comparePropertyFunc(values[i]);
-						var property2 = comparePropertyFunc(val);
-
-						if (!values[i].Equals(val) && ((property1 == null && property2 == null) || (property1 != null && property1.Equals(property2))))
-							duplicateIndexes.Add(i);
-					}
-				}
-
-				var uniqueDuplicateIndexes = duplicateIndexes.Distinct().ToList();
-
-				return uniqueDuplicateIndexes;
-			}
-
-			public IEnumerable<Expression> GetViolations<T, TOuter>(Expression<Func<TOuter, T>> prefix, Expression<Func<T, IList<TItem>>> propertyExpression)
-			{
-				var duplicates = this.GetDuplicateIndexes();
-
-				var violations = new List<Expression>();
-
-				for (var i = 0; i < duplicates.Count; i++)
-				{
-					var propExpr = this.GetExpression(prefix, propertyExpression, i);
-
-					violations.Add(propExpr);
-				}
-
-				return violations;
-			}
-
-			Expression GetExpression<T, TOuter>(Expression<Func<TOuter, T>> prefix, Expression<Func<T, IList<TItem>>> propertyExpression, int index)
-			{
-				Expression<Func<IList<TItem>, TItem>> indexer = y => y[index];
-				var errorProperty = propertyExpression.Combine(indexer, true).Combine(this.compareProperty, true);
-
-				if (prefix != null)
-				{
-					var combinedExpression = prefix.Combine(errorProperty, true);
-					return combinedExpression;
-				}
-
-				return errorProperty;
-			}
+				return list.Any(x => !item.Equals(x) && propertyValue.Equals(getCompareValue(x)));
+			});
 		}
 	}
 }

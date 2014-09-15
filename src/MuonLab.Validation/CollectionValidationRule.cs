@@ -16,7 +16,7 @@ namespace MuonLab.Validation
 
 		public override IEnumerable<IViolation> Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix)
 		{
-			var condition = this.validationExpression.Compile().Invoke(entity) as NoDuplicatesRule.IUrlCollectionCondition<TValue>;
+			var condition = this.validationExpression.Compile().Invoke(entity) as ICollectionCondition<TValue>;
 
 			var value = this.PropertyExpression.Compile().Invoke(entity);
 

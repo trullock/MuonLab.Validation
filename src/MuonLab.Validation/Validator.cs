@@ -104,7 +104,7 @@ namespace MuonLab.Validation
 			
 			if (genericTypeDefinition == typeof(ChildListValidationCondition<>))
 				this.vRules.Add(new ChildListValidationRule<T, TValue>(propertyCondition));
-			else if (genericTypeDefinition == typeof (NoDuplicatesRule.CollectionCondition<,>))
+			else if (genericTypeDefinition == typeof (CollectionCondition<,>))
 				this.vRules.Add(new CollectionValidationRule<T, TValue>(propertyCondition));
 			else
 				throw new NotSupportedException();
