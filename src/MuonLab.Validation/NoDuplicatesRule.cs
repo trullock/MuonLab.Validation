@@ -12,12 +12,12 @@ namespace MuonLab.Validation
 			return new CollectionCondition<TItem, TCompare>(self, compareProperty);
 		}
 
-		public interface IUrlCollectionCondition<TItem>
+		public interface ICollectionCondition<TItem>
 		{
 			IEnumerable<Expression> GetViolations<T, TOuter>(Expression<Func<TOuter, T>> expression, Expression<Func<T, IList<TItem>>> propertyExpression);
 		}
 
-		public sealed class CollectionCondition<TItem, TCompare> : PropertyCondition<IList<TItem>>, IUrlCollectionCondition<TItem>
+		public sealed class CollectionCondition<TItem, TCompare> : PropertyCondition<IList<TItem>>, ICollectionCondition<TItem>
 		{
 			readonly TItem[] values;
 			readonly Expression<Func<TItem, TCompare>> compareProperty;
