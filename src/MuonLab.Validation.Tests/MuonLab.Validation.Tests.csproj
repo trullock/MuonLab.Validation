@@ -65,6 +65,7 @@
     <Compile Include="Boolean\When_validating_a_property_as_false.cs" />
     <Compile Include="Boolean\When_validating_a_property_as_true.cs" />
     <Compile Include="Enumerables\When_validating_no_duplicates.cs" />
+    <Compile Include="when_nesting_validation.cs" />
     <Compile Include="when_validating_with_an_ANY_rule.cs" />
     <Compile Include="Enumerables\When_validating_complex_types.cs" />
     <Compile Include="ErrorMessagesShouldWork.cs" />

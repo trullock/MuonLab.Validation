@@ -2,10 +2,14 @@ using System;
 
 namespace MuonLab.Validation
 {
-	public class PropertyCondition<TValue> : ICondition<TValue>
+	public abstract class PropertyCondition
+	{
+		public string ErrorMessage { get; protected set; }
+	}
+
+	public class PropertyCondition<TValue> : PropertyCondition, ICondition<TValue>
 	{
 		public Func<TValue, bool> Condition { get; protected set; }
-		public string ErrorMessage { get; protected set; }
 
 		public PropertyCondition(Func<TValue, bool> condition, string errorMessage)
 		{
