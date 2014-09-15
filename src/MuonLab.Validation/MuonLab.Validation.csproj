@@ -64,6 +64,8 @@
     <Compile Include="ChildListValidationCondition.cs" />
     <Compile Include="ChildValidationCondition.cs" />
     <Compile Include="ChildValidationRule.cs" />
+    <Compile Include="CollectionCondition.cs" />
+    <Compile Include="CollectionValidationRule.cs" />
     <Compile Include="ConditionalPredicateValidationRule.cs" />
     <Compile Include="ConditionalValidationRule.cs" />
     <Compile Include="ChildListValidationRule.cs" />
@@ -80,12 +82,14 @@
     <Compile Include="Extensions\SemanticStringExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\StrongPasswordStringExtension.cs" />
+    <Compile Include="ICollectionCondition.cs" />
     <Compile Include="ICondition.cs" />
     <Compile Include="EmailValidator.cs" />
     <Compile Include="IValidationRule.cs" />
     <Compile Include="IValidator.cs" />
     <Compile Include="IViolation.cs" />
     <Compile Include="IViolationPropertyNameResolver.cs" />
+    <Compile Include="NoDuplicatesRule.cs" />
     <Compile Include="ParameterValidationRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyCondition.cs" />

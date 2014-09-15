@@ -64,7 +64,7 @@ namespace MuonLab.Validation
 				{
 					var index = ((exp.Arguments[0] as MemberExpression).Member as FieldInfo).GetValue(((exp.Arguments[0] as MemberExpression).Expression as ConstantExpression).Value);
 
-					return (exp.Object as MemberExpression).Member.Name + "[" + index + "]" + delimeter;
+					return propertyChainToString((exp.Object as MemberExpression).Expression, delimeter) + (exp.Object as MemberExpression).Member.Name + "[" + index + "]" + delimeter;
 				}
 			}
             return string.Empty;

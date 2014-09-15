@@ -81,13 +81,6 @@ namespace MuonLab.Validation
 			var genericTypeDefinition = methodCallExpression.Method.ReturnType.GetGenericTypeDefinition();
 			if (genericTypeDefinition == typeof(ChildValidationCondition<>))
 				this.vRules.Add(new ChildValidationRule<T, TValue>(propertyCondition));
-			else if (genericTypeDefinition == typeof(ChildListValidationCondition<>))
-			{
-				var listItemType = typeof(TValue).GetGenericArguments()[0];
-				var ruleType = typeof(ChildListValidationRule<,>).MakeGenericType(typeof(T), listItemType);
-				var rule = Activator.CreateInstance(ruleType, propertyCondition) as IValidationRule<T>;
-				this.vRules.Add(rule);
-			}
 			else
 			{
 				if(methodCallExpression.Arguments[0] is MemberExpression)
@@ -100,6 +93,23 @@ namespace MuonLab.Validation
 			}
 
 			return new ConditionalChain<TValue>(this, propertyCondition);
+		}
+
+
+		protected ConditionalChain<TValue> Ensure<TValue>(Expression<Func<T, ICondition<IList<TValue>>>> propertyCondition)
+		{
+			var methodCallExpression = propertyCondition.Body as MethodCallExpression;
+
+			var genericTypeDefinition = methodCallExpression.Method.ReturnType.GetGenericTypeDefinition();
+			
+			if (genericTypeDefinition == typeof(ChildListValidationCondition<>))
+				this.vRules.Add(new ChildListValidationRule<T, TValue>(propertyCondition));
+			else if (genericTypeDefinition == typeof (CollectionCondition<,>))
+				this.vRules.Add(new CollectionValidationRule<T, TValue>(propertyCondition));
+			else
+				throw new NotSupportedException();
+
+			return new ConditionalChain<TValue>(this, propertyCondition as Expression<Func<T, ICondition<TValue>>>);
 		}
 
 		protected void When<TValue>(Expression<Func<T, ICondition<TValue>>> whenCondition, Action rules)
