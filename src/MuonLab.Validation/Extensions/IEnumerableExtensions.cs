@@ -1,5 +1,6 @@
 using System.Collections;
 
+// ReSharper disable once CheckNamespace
 namespace MuonLab.Validation
 {
 	public static class IEnumerableExtensions

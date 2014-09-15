@@ -7,14 +7,13 @@ namespace MuonLab.Validation
 {
 	internal sealed class ChildListValidationRule<T, TValue> : IValidationRule<T>
 	{
+		protected MemberExpression property;
 		protected readonly Expression<Func<T, ICondition<IList<TValue>>>> validationExpression;
 
 		public MethodCallExpression Condition { get; protected set; }
-        
-		protected MemberExpression property;
 		public Expression<Func<T, IList<TValue>>> PropertyExpression { get; protected set; }
 
-		private ParameterExpression findParameter(Expression expression)
+		public ParameterExpression findParameter(Expression expression)
 		{
 			while (!(expression is ParameterExpression))
 			{

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 
+// ReSharper disable once CheckNamespace
 namespace MuonLab.Validation
 {
 	internal static class EnglishExtensions

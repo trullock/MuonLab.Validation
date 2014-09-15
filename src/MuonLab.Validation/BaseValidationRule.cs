@@ -6,11 +6,10 @@ namespace MuonLab.Validation
 {
 	public abstract class BaseValidationRule<T, TValue> : IValidationRule<T>
 	{
+		protected MemberExpression property;
 		protected readonly Expression<Func<T, ICondition<TValue>>> validationExpression;
 
 		public MethodCallExpression Condition { get; protected set; }
-        
-		protected MemberExpression property;
 		public Expression<Func<T, TValue>> PropertyExpression { get; protected set; }
 
 		protected BaseValidationRule(Expression<Func<T, ICondition<TValue>>> validationExpression)
@@ -21,7 +20,7 @@ namespace MuonLab.Validation
 
 		public abstract IEnumerable<IViolation> Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix);
 
-		protected ParameterExpression findParameter(Expression expression)
+		protected ParameterExpression FindParameter(Expression expression)
 		{
 			while (!(expression is ParameterExpression))
 			{

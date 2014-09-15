@@ -8,7 +8,7 @@ namespace MuonLab.Validation
 	/// <summary>
 	/// Code courtesy of Marc Gravell: http://stackoverflow.com/questions/1717444/combining-two-lamba-expressions-in-c/1720642#1720642
 	/// </summary>
-	internal sealed class ExpressionRewriter
+	sealed class ExpressionRewriter
 	{
 		internal Expression AutoInline(InvocationExpression expression)
 		{

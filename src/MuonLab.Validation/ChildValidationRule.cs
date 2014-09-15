@@ -4,13 +4,13 @@ using System.Linq.Expressions;
 
 namespace MuonLab.Validation
 {
-	internal sealed class ChildValidationRule<T, TValue> : BaseValidationRule<T, TValue>
+	sealed class ChildValidationRule<T, TValue> : BaseValidationRule<T, TValue>
 	{
 		public ChildValidationRule(Expression<Func<T, ICondition<TValue>>> validationExpression) : 
 			base(validationExpression)
 		{
 			this.property = this.Condition.Arguments[0] as MemberExpression;
-			this.PropertyExpression = Expression.Lambda<Func<T, TValue>>(this.property, findParameter(this.property));
+			this.PropertyExpression = Expression.Lambda<Func<T, TValue>>(this.property, this.FindParameter(this.property));
 		}
 
 		public override IEnumerable<IViolation> Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix)

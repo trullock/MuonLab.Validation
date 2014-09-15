@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
+// ReSharper disable once CheckNamespace
 namespace MuonLab.Validation
 {
 	public static class SatisfiesExtension

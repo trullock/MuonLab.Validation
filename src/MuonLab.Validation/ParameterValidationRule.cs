@@ -6,8 +6,7 @@ namespace MuonLab.Validation
 {
 	public class ParameterValidationRule<T> : BaseValidationRule<T, T>
 	{
-		public ParameterValidationRule(Expression<Func<T, ICondition<T>>> validationExpression)
-			: base(validationExpression)
+		public ParameterValidationRule(Expression<Func<T, ICondition<T>>> validationExpression) : base(validationExpression)
 		{
 			var param = this.Condition.Arguments[0] as ParameterExpression;
 			this.PropertyExpression = Expression.Lambda<Func<T, T>>(param, param);
@@ -22,27 +21,27 @@ namespace MuonLab.Validation
 			if (!valid)
 			{
 				if (prefix != null)
-					return new[] {createViolation(condition, entity, prefix)};
+					return new[] {this.CreateViolation(condition, entity, prefix)};
 				
-				return new[] {createViolation(condition, entity, this.PropertyExpression)};
+				return new[] {this.CreateViolation(condition, entity, this.PropertyExpression)};
 			}
 			
 			return new IViolation[0];
 		}
 
-		protected IViolation createViolation(PropertyCondition<T> condition, T entity, Expression property)
+		protected IViolation CreateViolation(PropertyCondition<T> condition, T entity, Expression property)
 		{
 			var errorMessage = condition.ErrorMessage;
 
 			errorMessage = errorMessage.Replace("{val}", typeof (T).GetEnglishName());
 
 			for (int i = 1; i < this.Condition.Arguments.Count; i++)
-				errorMessage = errorMessage.Replace("{arg" + i + "}", evaluateExpression(this.Condition.Arguments[i], entity));
+				errorMessage = errorMessage.Replace("{arg" + i + "}", this.EvaluateExpression(this.Condition.Arguments[i], entity));
 
 			return new Violation(errorMessage, property, entity);
 		}
 
-		protected string getMemberName(MemberExpression member)
+		protected string GetMemberName(MemberExpression member)
 		{
 			if (this.property.Member.DeclaringType.IsGenericType && this.property.Member.DeclaringType.GetGenericTypeDefinition() == typeof(Nullable<>))
 				return (member.Expression as MemberExpression).Member.GetEnglishName();
@@ -50,10 +49,10 @@ namespace MuonLab.Validation
 			return member.Member.GetEnglishName();
 		}
 
-		protected string evaluateExpression(Expression expression, T entity)
+		protected string EvaluateExpression(Expression expression, T entity)
 		{
 			if (expression is MemberExpression)
-				return getMemberName(expression as MemberExpression);
+				return this.GetMemberName(expression as MemberExpression);
 			
 			var lambda = Expression.Lambda(expression, this.validationExpression.Parameters[0]);
 			var value = lambda.Compile().DynamicInvoke(entity);

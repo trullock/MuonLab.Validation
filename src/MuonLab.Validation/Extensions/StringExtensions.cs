@@ -1,6 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 
+// ReSharper disable once CheckNamespace
 namespace MuonLab.Validation
 {
 	public static class StringExtensions

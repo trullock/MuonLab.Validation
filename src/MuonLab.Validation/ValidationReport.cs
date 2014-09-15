@@ -21,7 +21,7 @@ namespace MuonLab.Validation
 		{
 			get
 			{
-				return this.Violations.Count() == 0;
+				return !this.Violations.Any();
 			}
 		}
 	}

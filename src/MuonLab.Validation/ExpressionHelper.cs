@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace MuonLab.Validation
 {
-	internal static class ExpressionHelper
+	static class ExpressionHelper
 	{
         /// <summary>
         /// Combines two delegate expressions into a single delegate
@@ -22,6 +22,5 @@ namespace MuonLab.Validation
 
 			return Expression.Lambda<Func<T1, T3>>(body, outer.Parameters);
 		}
-
 	}
 }
