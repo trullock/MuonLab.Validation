@@ -7,12 +7,12 @@ namespace MuonLab.Validation
 	{
 		public static ICondition<IEnumerable> ContainsElements(this IEnumerable self)
 		{
-			return self.ContainsElements("{val} must contain at least one entry");
+			return self.ContainsElements("NotEmpty");
 		}
 
-		public static ICondition<IEnumerable> ContainsElements(this IEnumerable self, string errorMessage)
+		public static ICondition<IEnumerable> ContainsElements(this IEnumerable self, string errorKey)
 		{
-			return self.Satisfies(x => (x ?? new object[] {}).GetEnumerator().MoveNext(), errorMessage);
+			return self.Satisfies(x => (x ?? new object[] {}).GetEnumerator().MoveNext(), errorKey);
 		}
 	}
 }

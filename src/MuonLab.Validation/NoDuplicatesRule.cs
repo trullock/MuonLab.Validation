@@ -12,9 +12,9 @@ namespace MuonLab.Validation
 			return self.DoesNotHaveDuplicates(compareProperty, "{val} must be unique");
 		}
 
-		public static CollectionCondition<TItem, TCompare> DoesNotHaveDuplicates<TItem, TCompare>(this IList<TItem> self, Expression<Func<TItem, TCompare>> compareProperty, string errorMessage)
+		public static CollectionCondition<TItem, TCompare> DoesNotHaveDuplicates<TItem, TCompare>(this IList<TItem> self, Expression<Func<TItem, TCompare>> compareProperty, string errorKey)
 		{
-			return new CollectionCondition<TItem, TCompare>(errorMessage, self, compareProperty, (list, item, getCompareValue) =>
+			return new CollectionCondition<TItem, TCompare>(errorKey, self, compareProperty, (list, item, getCompareValue) =>
 			{
 				var propertyValue = getCompareValue(item);
 

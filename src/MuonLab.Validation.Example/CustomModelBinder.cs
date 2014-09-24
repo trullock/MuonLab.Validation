@@ -29,8 +29,7 @@ namespace MuonLab.Validation.Example
 				foreach (var violation in validationReport.Violations)
 				{
 					// add errors to modelstate
-					bindingContext.ModelState.AddModelError(violationPropertyNameResolver.ResolvePropertyName(violation),
-					                                        violation.ErrorMessage);
+					bindingContext.ModelState.AddModelError(violationPropertyNameResolver.ResolvePropertyName(violation), violation.Error.Key);
 				}
 			}
 

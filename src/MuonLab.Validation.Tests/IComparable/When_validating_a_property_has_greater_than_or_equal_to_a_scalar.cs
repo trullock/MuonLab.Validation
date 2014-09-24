@@ -20,10 +20,9 @@ namespace MuonLab.Validation.Tests.IComparable
 			var testClass = new TestClass(1);
 
 			var validationReport = this.validator.Validate(testClass);
-
-			var violations = validationReport.Violations.ToArray();
-
-			Assert.AreEqual("Value must be greater than or equal to 4", violations[0].ErrorMessage);
+			validationReport.Violations.First().Error.Key.ShouldEqual("GreaterThanEq");
+			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("Value");
+			validationReport.Violations.First().Error.Replacements["arg0"].ShouldEqual("4");
 		}
 
 		[Test]

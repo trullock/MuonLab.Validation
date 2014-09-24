@@ -33,7 +33,8 @@ namespace MuonLab.Validation.Tests.Boolean
 
 			var violations = validationReport.Violations.ToArray();
 
-			Assert.AreEqual("value must be true", violations[0].ErrorMessage);
+			violations[0].Error.Key.ShouldEqual("BeTrue");
+			violations[0].Error.Replacements["prop"].ShouldEqual("value");
 		}
 
 		private class TestClass

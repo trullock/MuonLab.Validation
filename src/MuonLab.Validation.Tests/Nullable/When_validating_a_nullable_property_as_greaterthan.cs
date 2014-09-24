@@ -22,7 +22,9 @@ namespace MuonLab.Validation.Tests.Nullable
 			var validationReport = this.validator.Validate(testClass);
 			var violations = validationReport.Violations.ToArray();
 
-			violations[0].ErrorMessage.ShouldEqual("Nullable int must be greater than or equal to 1");
+			violations[0].Error.Key.ShouldEqual("GreaterThanEq");
+			violations[0].Error.Replacements["prop"].ShouldEqual("Nullable int");
+			violations[0].Error.Replacements["arg0"].ShouldEqual("1");
 		}
 
 		[Test]

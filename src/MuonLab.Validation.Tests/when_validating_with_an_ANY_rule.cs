@@ -21,7 +21,6 @@ namespace MuonLab.Validation.Tests
 
 			var validationReport = this.validator.Validate(testClass);
 
-			//validationReport.Violations.First().ErrorMessage.ShouldEqual("Value must be the same as 1");
 			validationReport.Violations.Count().ShouldEqual(0);
 		}
 
@@ -32,7 +31,6 @@ namespace MuonLab.Validation.Tests
 
 			var validationReport = this.validator.Validate(testClass);
 
-			//validationReport.Violations.First().ErrorMessage.ShouldEqual("Value 2 must be the same as 3");
 			validationReport.Violations.Count().ShouldEqual(0);
 		}
 
@@ -43,7 +41,6 @@ namespace MuonLab.Validation.Tests
 
 			var validationReport = this.validator.Validate(testClass);
 
-			//validationReport.Violations.First().ErrorMessage.ShouldEqual("Value 2 must be the same as 3");
 			validationReport.Violations.Count().ShouldEqual(2);
 		}
 

@@ -11,14 +11,14 @@ namespace MuonLab.Validation
 		readonly Func<IList<TItem>, TItem, Func<TItem, TCompare>, bool> testFunction;
 		readonly Expression<Func<TItem, TCompare>> compareProperty;
 
-		public CollectionCondition(string errorMessage, IEnumerable<TItem> values, Expression<Func<TItem, TCompare>> compareProperty, Func<IList<TItem>, TItem, Func<TItem, TCompare>, bool> testFunction)
+		public CollectionCondition(string errorKey, IEnumerable<TItem> values, Expression<Func<TItem, TCompare>> compareProperty, Func<IList<TItem>, TItem, Func<TItem, TCompare>, bool> testFunction)
 			: base(null, null)
 		{
 			this.values = values.ToArray();
 			this.testFunction = testFunction;
 			this.compareProperty = compareProperty;
 			
-			this.ErrorMessage = errorMessage;
+			this.ErrorKey = errorKey;
 		}
 
 		IList<int> GetInvalidIndexes()

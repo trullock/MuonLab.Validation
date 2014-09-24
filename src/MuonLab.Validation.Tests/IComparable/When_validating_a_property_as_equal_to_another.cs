@@ -21,9 +21,9 @@ namespace MuonLab.Validation.Tests.IComparable
 
 			var validationReport = this.validator.Validate(testClass);
 
-			var violations = validationReport.Violations.ToArray();
-
-			Assert.AreEqual("value must be the same as Value 2", violations[0].ErrorMessage);
+			validationReport.Violations.First().Error.Key.ShouldEqual("EqualTo");
+			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
+			validationReport.Violations.First().Error.Replacements["arg0"].ShouldEqual("Value 2");
 		}
 
 		[Test]
@@ -35,7 +35,9 @@ namespace MuonLab.Validation.Tests.IComparable
 
 			var violations = validationReport.Violations.ToArray();
 
-			Assert.AreEqual("value must be the same as Value 2", violations[0].ErrorMessage);
+			validationReport.Violations.First().Error.Key.ShouldEqual("EqualTo");
+			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
+			validationReport.Violations.First().Error.Replacements["arg0"].ShouldEqual("Value 2");
 		}
 
 		[Test]

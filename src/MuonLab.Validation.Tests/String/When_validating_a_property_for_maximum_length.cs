@@ -32,9 +32,9 @@ namespace MuonLab.Validation.Tests.String
 
 			var validationReport = this.validator.Validate(testClass);
 
-			var violations = validationReport.Violations.ToArray();
-
-			Assert.AreEqual("value must be at most 5 characters", violations[0].ErrorMessage);
+			validationReport.Violations.First().Error.Key.ShouldEqual("MaxLength");
+			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
+			validationReport.Violations.First().Error.Replacements["arg0"].ShouldEqual("5");
 		}
 
 		[Test]

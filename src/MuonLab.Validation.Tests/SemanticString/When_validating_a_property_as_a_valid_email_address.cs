@@ -21,9 +21,8 @@ namespace MuonLab.Validation.Tests.SemanticString
 
 			var validationReport = this.validator.Validate(testClass);
 
-			var violations = validationReport.Violations.ToArray();
-
-			Assert.AreEqual("value must be a valid email address", violations[0].ErrorMessage);
+			validationReport.Violations.First().Error.Key.ShouldEqual("ValidEmail");
+			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 		}
 
 		[Test]
@@ -33,9 +32,8 @@ namespace MuonLab.Validation.Tests.SemanticString
 
 			var validationReport = this.validator.Validate(testClass);
 
-			var violations = validationReport.Violations.ToArray();
-
-			Assert.AreEqual("value must be a valid email address", violations[0].ErrorMessage);
+			validationReport.Violations.First().Error.Key.ShouldEqual("ValidEmail");
+			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 		}
 
 		[Test]
@@ -54,8 +52,8 @@ namespace MuonLab.Validation.Tests.SemanticString
 			var testClass = new TestClass("andrew.bullock.north-51.com");
 			var validationReport = this.validator.Validate(testClass);
 
-			var violations = validationReport.Violations.ToArray();
-			Assert.AreEqual("value must be a valid email address", violations[0].ErrorMessage);
+			validationReport.Violations.First().Error.Key.ShouldEqual("ValidEmail");
+			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 		}
 
 		[Test]
@@ -64,8 +62,8 @@ namespace MuonLab.Validation.Tests.SemanticString
 			var testClass = new TestClass("www.north-51.com");
 			var validationReport = this.validator.Validate(testClass);
 
-			var violations = validationReport.Violations.ToArray();
-			Assert.AreEqual("value must be a valid email address", violations[0].ErrorMessage);
+			validationReport.Violations.First().Error.Key.ShouldEqual("ValidEmail");
+			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 		}
 
 		private class TestClass

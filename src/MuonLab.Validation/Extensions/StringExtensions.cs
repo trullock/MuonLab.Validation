@@ -13,42 +13,20 @@ namespace MuonLab.Validation
 		/// <returns></returns>
 		public static ICondition<string> IsNotNullOrEmpty(this string self)
 		{
-			return self.IsNotNullOrEmpty("{val} is required");
+			return self.IsNotNullOrEmpty("Required");
 		}
 
 		/// <summary>
 		/// Ensure the property is not null or empty
 		/// </summary>
 		/// <param name="self"></param>
-		/// <param name="errorMessage">The associated error message</param>
+		/// <param name="errorKey">The associated error message</param>
 		/// <returns></returns>
-		public static ICondition<string> IsNotNullOrEmpty(this string self, string errorMessage)
+		public static ICondition<string> IsNotNullOrEmpty(this string self, string errorKey)
 		{
-			return self.Satisfies(s => !string.IsNullOrEmpty(s), errorMessage);
+			return self.Satisfies(s => !string.IsNullOrEmpty(s), errorKey);
 		}
-
-		/// <summary>
-		/// Ensure the property is not null or empty
-		/// </summary>
-		/// <param name="self"></param>
-		/// <returns></returns>
-		public static ICondition<string> IsNullOrIsEmpty(this string self)
-		{
-			return self.IsNullOrIsEmpty("{val} must not have a value");
-		}
-
-		/// <summary>
-		/// Ensure the property is not null or empty
-		/// </summary>
-		/// <param name="self"></param>
-		/// <param name="errorMessage">The associated error message</param>
-		/// <returns></returns>
-		public static ICondition<string> IsNullOrIsEmpty(this string self, string errorMessage)
-		{
-			return self.Satisfies(s => string.IsNullOrEmpty(s), errorMessage);
-		}
-
-
+		
 		/// <summary>
 		/// Ensure the property has a maximum character length
 		/// </summary>
@@ -57,7 +35,7 @@ namespace MuonLab.Validation
 		/// <returns></returns>
 		public static ICondition<string> HasMaximumLength(this string self, int maxLength)
 		{
-			return self.HasMaximumLength(maxLength, "{val} must be at most {arg1} characters");
+			return self.HasMaximumLength(maxLength, "MaxLength");
 		}
 
 		/// <summary>
@@ -65,11 +43,11 @@ namespace MuonLab.Validation
 		/// </summary>
 		/// <param name="self"></param>
 		/// /// <param name="maxLength">the maximum character length</param>
-		/// <param name="errorMessage">The associated error message</param>
+		/// <param name="errorKey">The associated error message key</param>
 		/// <returns></returns>
-		public static ICondition<string> HasMaximumLength(this string self, int maxLength, string errorMessage)
+		public static ICondition<string> HasMaximumLength(this string self, int maxLength, string errorKey)
 		{
-			return self.Satisfies(s => (s ?? string.Empty).Length <= maxLength, errorMessage);
+			return self.Satisfies(s => (s ?? string.Empty).Length <= maxLength, errorKey);
 		}
 
 		/// <summary>
@@ -80,7 +58,7 @@ namespace MuonLab.Validation
 		/// <returns></returns>
 		public static ICondition<string> HasMinimumLength(this string self, int minLength)
 		{
-			return self.HasMinimumLength(minLength, "{val} must be at least {arg1} characters");
+			return self.HasMinimumLength(minLength, "MinLength");
 		}
 
 		/// <summary>
@@ -88,11 +66,11 @@ namespace MuonLab.Validation
 		/// </summary>
 		/// <param name="self"></param>
 		/// /// <param name="minLength">the minimum character length</param>
-		/// <param name="errorMessage">The associated error message</param>
+		/// <param name="errorKey">The associated error message key</param>
 		/// <returns></returns>
-		public static ICondition<string> HasMinimumLength(this string self, int minLength, string errorMessage)
+		public static ICondition<string> HasMinimumLength(this string self, int minLength, string errorKey)
 		{
-			return self.Satisfies(s => (s ?? string.Empty).Length >= minLength, errorMessage);
+			return self.Satisfies(s => (s ?? string.Empty).Length >= minLength, errorKey);
 		}
 
 		/// <summary>
@@ -100,11 +78,11 @@ namespace MuonLab.Validation
 		/// </summary>
 		/// <param name="self"></param>
 		/// <param name="regex">The matching regex</param>
-		/// <param name="errorMessage">The associated error message</param>
+		/// <param name="errorKey">The associated error message</param>
 		/// <returns></returns>
-		public static ICondition<string> Matches(this string self, string regex, string errorMessage)
+		public static ICondition<string> Matches(this string self, string regex, string errorKey)
 		{
-			return self.Matches(regex, RegexOptions.None, errorMessage);
+			return self.Matches(regex, RegexOptions.None, errorKey);
 		}
 
 		/// <summary>
@@ -113,11 +91,11 @@ namespace MuonLab.Validation
 		/// <param name="self"></param>
 		/// <param name="regex">The matching regex</param>
 		/// <param name="options">The Regex Options</param>
-		/// <param name="errorMessage">The associated error message</param>
+		/// <param name="errorKey">The associated error message</param>
 		/// <returns></returns>
-		public static ICondition<string> Matches(this string self, string regex, RegexOptions options, string errorMessage)
+		public static ICondition<string> Matches(this string self, string regex, RegexOptions options, string errorKey)
 		{
-			return self.Satisfies(s => s != null ? Regex.Match(s, regex, options).Success : false, errorMessage);
+			return self.Satisfies(s => s != null && Regex.Match(s, regex, options).Success, errorKey);
 		}
 
 		/// <summary>
@@ -125,11 +103,11 @@ namespace MuonLab.Validation
 		/// </summary>
 		/// <param name="self"></param>
 		/// <param name="regex">The matching regex</param>
-		/// <param name="errorMessage">The associated error message</param>
+		/// <param name="errorKey">The associated error message</param>
 		/// <returns></returns>
-		public static ICondition<string> Matches(this string self, Regex regex, string errorMessage)
+		public static ICondition<string> Matches(this string self, Regex regex, string errorKey)
 		{
-			return self.Satisfies(s => s != null ? regex.Match(s).Success : false, errorMessage);
+			return self.Satisfies(s => s != null && regex.Match(s).Success, errorKey);
 		}
 
 		/// <summary>
@@ -153,7 +131,7 @@ namespace MuonLab.Validation
 		/// <returns></returns>
 		public static ICondition<string> IsEqualTo(this string self, string value, StringComparison comparison)
 		{
-			return self.Satisfies(s => (s == null && value == null) || (s != null && s.Equals(value, comparison)), "{val} must be the same as {arg1}");
+			return self.Satisfies(s => (s == null && value == null) || (s != null && s.Equals(value, comparison)), "EqualTo");
 		}
 
 		/// <summary>
@@ -162,11 +140,11 @@ namespace MuonLab.Validation
 		/// <param name="self"></param>
 		/// <param name="value">The value to be equal to</param>
 		/// <param name="comparison">The string comparison method</param>
-		/// <param name="errorMessage">The error message</param>
+		/// <param name="errorKey">The error message</param>
 		/// <returns></returns>
-		public static ICondition<string> IsEqualTo(this string self, string value, StringComparison comparison, string errorMessage)
+		public static ICondition<string> IsEqualTo(this string self, string value, StringComparison comparison, string errorKey)
 		{
-			return self.Satisfies(s => (s == null && value == null) || (s != null && s.Equals(value, comparison)), errorMessage);
+			return self.Satisfies(s => (s == null && value == null) || (s != null && s.Equals(value, comparison)), errorKey);
 		}
 	}
 }

@@ -21,9 +21,9 @@ namespace MuonLab.Validation.Tests.IComparable
 
 			var validationReport = this.validator.Validate(testClass);
 
-			var violations = validationReport.Violations.ToArray();
-
-			Assert.AreEqual("Value must be greater than or equal to Value 2", violations[0].ErrorMessage);
+			validationReport.Violations.First().Error.Key.ShouldEqual("GreaterThanEq");
+			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("Value");
+			validationReport.Violations.First().Error.Replacements["arg0"].ShouldEqual("Value 2");
 		}
 
 		[Test]

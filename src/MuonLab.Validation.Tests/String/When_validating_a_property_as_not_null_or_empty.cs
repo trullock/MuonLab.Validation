@@ -20,10 +20,8 @@ namespace MuonLab.Validation.Tests.String
 			var testClass = new TestClass(null);
 
 			var validationReport = this.validator.Validate(testClass);
-
-			var violations = validationReport.Violations.ToArray();
-
-			Assert.AreEqual("value is required", violations[0].ErrorMessage);
+			validationReport.Violations.First().Error.Key.ShouldEqual("Required");
+			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 		}
 
 		[Test]
@@ -33,9 +31,8 @@ namespace MuonLab.Validation.Tests.String
 
 			var validationReport = this.validator.Validate(testClass);
 
-			var violations = validationReport.Violations.ToArray();
-
-			Assert.AreEqual("value is required", violations[0].ErrorMessage);
+			validationReport.Violations.First().Error.Key.ShouldEqual("Required");
+			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 		}
 
 		[Test]

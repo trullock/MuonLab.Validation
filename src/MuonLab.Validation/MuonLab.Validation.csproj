@@ -70,6 +70,7 @@
     <Compile Include="ConditionalValidationRule.cs" />
     <Compile Include="ChildListValidationRule.cs" />
     <Compile Include="AnyValidationRule.cs" />
+    <Compile Include="ErrorDescriptior.cs" />
     <Compile Include="Extensions\EnglishExtensions.cs" />
     <Compile Include="ExpressionHelper.cs" />
     <Compile Include="ExpressionRewriter.cs" />
@@ -116,6 +117,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ErrorMessages.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

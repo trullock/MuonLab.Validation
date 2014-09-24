@@ -24,19 +24,21 @@ namespace MuonLab.Validation
 
 			var propertyCondition = condition as PropertyCondition;
 
-			return expressions.Select(expression => this.CreateViolation(propertyCondition.ErrorMessage, value, entity, expression)).ToArray();
+			return expressions.Select(expression => this.CreateViolation(propertyCondition.ErrorKey, value, entity, expression)).ToArray();
 		}
 
-		protected IViolation CreateViolation(string errorMessage, IEnumerable<TValue> value, T entity, Expression property)
+		protected IViolation CreateViolation(string errorKey, IEnumerable<TValue> value, T entity, Expression property)
 		{
-			errorMessage = errorMessage.Replace("{val}", this.GetMemberName(this.property));
+			var replacements = new Dictionary<string, string>
+			{
+				{ "prop", this.GetMemberName(this.property) },
+				{ "val", ReferenceEquals(value, null) ? "NULL" : value.ToString() }
+			};
 
-			errorMessage = errorMessage.Replace("{arg0}", ReferenceEquals(value, null) ? "NULL" : value.ToString());
-
-			for (int i = 1; i < this.Condition.Arguments.Count; i++)
-				errorMessage = errorMessage.Replace("{arg" + i + "}", this.EvaluateExpression(this.Condition.Arguments[i], entity));
-
-			return new Violation(errorMessage, property, value);
+			for (var i = 1; i < this.Condition.Arguments.Count; i++)
+				replacements.Add("arg" + (i - 1), this.EvaluateExpression(this.Condition.Arguments[i], entity));
+			
+			return new Violation(new ErrorDescriptior(errorKey, replacements), property, value);
 		}
 
 		protected string GetMemberName(MemberExpression member)

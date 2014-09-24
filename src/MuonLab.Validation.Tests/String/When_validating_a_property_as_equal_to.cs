@@ -22,9 +22,7 @@ namespace MuonLab.Validation.Tests.String
 
 			var validationReport = this.validator.Validate(testClass);
 
-			var violations = validationReport.Violations.ToArray();
-
-			Assert.AreEqual("error", violations[0].ErrorMessage);
+			validationReport.Violations.First().Error.Key.ShouldEqual("error");
 		}
 
 

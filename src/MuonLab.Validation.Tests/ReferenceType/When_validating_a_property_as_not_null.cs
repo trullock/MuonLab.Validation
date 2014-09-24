@@ -31,10 +31,8 @@ namespace MuonLab.Validation.Tests.ReferenceType
 
 			var validationReport = this.validator.Validate(testClass);
 
-			var violations = validationReport.Violations.ToArray();
-
-			Assert.AreEqual("value is required", violations[0].ErrorMessage);
-			Assert.AreEqual("test message", violations[1].ErrorMessage);
+			validationReport.Violations.First().Error.Key.ShouldEqual("Required");
+			validationReport.Violations.Skip(1).First().Error.Key.ShouldEqual("test key");
 		}
 
 		private class TestClass
@@ -52,7 +50,7 @@ namespace MuonLab.Validation.Tests.ReferenceType
 			protected override void Rules()
 			{
 				Ensure(x => x.value.IsNotNull());
-				Ensure(x => x.value.IsNotNull("test message"));
+				Ensure(x => x.value.IsNotNull("test key"));
 			}
 		}
 	}

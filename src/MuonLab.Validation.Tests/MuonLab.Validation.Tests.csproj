@@ -94,7 +94,6 @@
     <Compile Include="Nullable\When_validating_a_nullable_property.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceType\When_validating_a_property_as_not_null.cs" />
-    <Compile Include="ReferenceType\When_validating_a_property_as_null.cs" />
     <Compile Include="SemanticString\When_validating_a_property_as_a_valid_bs7666_post_code.cs" />
     <Compile Include="SemanticString\When_validating_a_property_as_a_valid_email_address.cs" />
     <Compile Include="String\When_validating_a_property_as_not_null_or_empty.cs" />
@@ -103,7 +102,6 @@
     <Compile Include="TestClass.cs" />
     <Compile Include="TestClassWrapper.cs" />
     <Compile Include="validation_fixture.cs" />
-    <Compile Include="when_constructing_a_violation.cs" />
     <Compile Include="when_validating_against_the_a_basic_nested_property.cs" />
     <Compile Include="when_validating_against_the_a_basic_property.cs" />
     <Compile Include="when_validating_against_the_a_nested_parameter_rule.cs" />

@@ -31,14 +31,15 @@ namespace MuonLab.Validation
 
 		protected IViolation CreateViolation(PropertyCondition<T> condition, T entity, Expression property)
 		{
-			var errorMessage = condition.ErrorMessage;
+			var replacements = new Dictionary<string, string>
+			{
+				{ "val", ReferenceEquals(entity, null) ? "NULL" : entity.ToString() }
+			};
 
-			errorMessage = errorMessage.Replace("{val}", typeof (T).GetEnglishName());
+			for (var i = 1; i < this.Condition.Arguments.Count; i++)
+				replacements.Add("arg" + (i - 1), this.EvaluateExpression(this.Condition.Arguments[i], entity));
 
-			for (int i = 1; i < this.Condition.Arguments.Count; i++)
-				errorMessage = errorMessage.Replace("{arg" + i + "}", this.EvaluateExpression(this.Condition.Arguments[i], entity));
-
-			return new Violation(errorMessage, property, entity);
+			return new Violation(new ErrorDescriptior(condition.ErrorKey, replacements), property, entity);
 		}
 
 		protected string GetMemberName(MemberExpression member)

@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using NUnit.Framework;
 
@@ -20,7 +19,7 @@ namespace MuonLab.Validation.Tests
 		[Test]
 		public void the_validation_report_should_be_valid()
 		{
-			report.Violations.First().ErrorMessage.ShouldEqual("Age 12 10");
+			report.Violations.First().Error.Key.ShouldEqual("Age 12 10");
 		}
 
 		public class TestValidator : Validator<TestClass>

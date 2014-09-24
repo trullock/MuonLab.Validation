@@ -32,33 +32,33 @@ namespace MuonLab.Validation
 							// Check length
 							if (s.Length < minimumLength)
 							{
-								this.ErrorMessage = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
+								this.ErrorKey = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
 								return false;
 							}
 
 							// check case variation
 							if (requireCaseVariation && !ValidateRegex(s, @"(?=.*[a-z])(?=.*[A-Z])"))
 							{
-								this.ErrorMessage = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
+								this.ErrorKey = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
 								return false;
 							}
 							else if (!requireCaseVariation && !ValidateRegex(s, @"(?=.*[a-zA-Z])"))
 							{
-								this.ErrorMessage = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
+								this.ErrorKey = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
 								return false;
 							}
 
 							// check numerics
 							if (requireNumeric && !ValidateRegex(s, @"(?=.*[0-9])"))
 							{
-								this.ErrorMessage = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
+								this.ErrorKey = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
 								return false;
 							}
 
 							// check presence of non alphanumeric
 							if (requireNonAlphanumeric && !ValidateRegex(s, @"(?=.*[^0-9a-zA-Z])"))
 							{
-								this.ErrorMessage = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
+								this.ErrorKey = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
 								return false;
 							}
 						}
@@ -67,6 +67,7 @@ namespace MuonLab.Validation
 					};
 			}
 
+			// TODO: globalize
 			static string GetErrorMessage(int minimumLength, bool requireCaseVariation, bool requireNumeric, bool requireNonAlphanumeric)
 			{
 				IList<string> errors = new List<string>();

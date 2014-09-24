@@ -31,9 +31,9 @@ namespace MuonLab.Validation.Tests.IComparable
 
 			var validationReport = this.validator.Validate(testClass);
 
-			var violations = validationReport.Violations.ToArray();
-
-			Assert.AreEqual("value must be less than or equal to Value 2", violations[0].ErrorMessage);
+			validationReport.Violations.First().Error.Key.ShouldEqual("LessThanEq");
+			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
+			validationReport.Violations.First().Error.Replacements["arg0"].ShouldEqual("Value 2");
 		}
 
 		[Test]

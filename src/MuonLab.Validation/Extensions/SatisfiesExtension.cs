@@ -7,9 +7,9 @@ namespace MuonLab.Validation
 {
 	public static class SatisfiesExtension
 	{
-		public static ICondition<TValue> Satisfies<TValue>(this TValue self, Expression<Func<TValue, bool>> condition, string errorMessage)
+		public static ICondition<TValue> Satisfies<TValue>(this TValue self, Expression<Func<TValue, bool>> condition, string errorKey)
 		{
-			return new PropertyCondition<TValue>(condition.Compile(), errorMessage);
+			return new PropertyCondition<TValue>(condition.Compile(), errorKey);
 		}
 
 		public static ChildValidationCondition<TValue> Satisfies<TValue>(this TValue self, IValidator<TValue> validator)
