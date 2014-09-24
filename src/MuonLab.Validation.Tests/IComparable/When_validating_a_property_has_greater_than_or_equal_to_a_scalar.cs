@@ -21,7 +21,6 @@ namespace MuonLab.Validation.Tests.IComparable
 
 			var validationReport = this.validator.Validate(testClass);
 			validationReport.Violations.First().Error.Key.ShouldEqual("GreaterThanEq");
-			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("Value");
 			validationReport.Violations.First().Error.Replacements["arg0"].ShouldEqual("4");
 		}
 

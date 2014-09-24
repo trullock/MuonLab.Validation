@@ -22,7 +22,6 @@ namespace MuonLab.Validation.Tests.SemanticString
 			var validationReport = this.validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("ValidPostcode");
-			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("Postcode");
 		}
 
 		[Test]
@@ -33,7 +32,6 @@ namespace MuonLab.Validation.Tests.SemanticString
 			var validationReport = this.validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("ValidPostcode");
-			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("Postcode");
 		}
 
 		[Test]

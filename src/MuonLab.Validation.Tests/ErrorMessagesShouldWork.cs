@@ -6,20 +6,20 @@ namespace MuonLab.Validation.Tests
 	[TestFixture]
 	public class ErrorMessagesShouldWork
 	{
-		private TestValidator validator;
-		private ValidationReport report;
+		TestValidator validator;
+		ValidationReport report;
 
 		[SetUp]
 		public void SetUp()
 		{
 			this.validator = new TestValidator();
-			this.report = this.validator.Validate(new TestClass { Age = 12});
+			this.report = this.validator.Validate(new TestClass { Age = 12 });
 		}
 
 		[Test]
 		public void the_validation_report_should_be_valid()
 		{
-			report.Violations.First().Error.Key.ShouldEqual("Age 12 10");
+			report.Violations.First().Error.Key.ShouldEqual("Key");
 		}
 
 		public class TestValidator : Validator<TestClass>
@@ -35,7 +35,7 @@ namespace MuonLab.Validation.Tests
 	{
 		public static ICondition<int> ShouldProduceErrorMessage(this int self, int someArg)
 		{
-			return self.Satisfies(x => false, "{val} {arg0} {arg1}");
+			return self.Satisfies(x => false, "Key");
 		}
 	}
 }

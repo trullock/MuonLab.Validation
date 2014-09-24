@@ -22,7 +22,6 @@ namespace MuonLab.Validation.Tests.Nullable
 			var validationReport = this.validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("BeTrue");
-			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("Nullable bool");
 		}
 
 		[Test]

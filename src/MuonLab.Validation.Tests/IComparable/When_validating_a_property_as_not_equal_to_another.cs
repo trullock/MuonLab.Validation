@@ -42,7 +42,6 @@ namespace MuonLab.Validation.Tests.IComparable
 			var validationReport = this.validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("NotEqualTo");
-			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 			validationReport.Violations.First().Error.Replacements["arg0"].ShouldEqual("Value 2");
 		}
 

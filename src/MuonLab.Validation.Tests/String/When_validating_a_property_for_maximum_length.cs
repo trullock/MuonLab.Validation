@@ -33,7 +33,6 @@ namespace MuonLab.Validation.Tests.String
 			var validationReport = this.validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("MaxLength");
-			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 			validationReport.Violations.First().Error.Replacements["arg0"].ShouldEqual("5");
 		}
 

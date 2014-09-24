@@ -21,7 +21,6 @@ namespace MuonLab.Validation.Tests.String
 
 			var validationReport = this.validator.Validate(testClass);
 			validationReport.Violations.First().Error.Key.ShouldEqual("Required");
-			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 		}
 
 		[Test]
@@ -32,7 +31,6 @@ namespace MuonLab.Validation.Tests.String
 			var validationReport = this.validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("Required");
-			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 		}
 
 		[Test]

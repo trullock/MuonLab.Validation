@@ -34,7 +34,6 @@ namespace MuonLab.Validation.Tests.Boolean
 			var violations = validationReport.Violations.ToArray();
 
 			violations[0].Error.Key.ShouldEqual("BeTrue");
-			violations[0].Error.Replacements["prop"].ShouldEqual("value");
 		}
 
 		private class TestClass

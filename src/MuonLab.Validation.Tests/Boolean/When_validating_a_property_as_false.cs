@@ -32,7 +32,6 @@ namespace MuonLab.Validation.Tests.Boolean
 			var validationReport = this.validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("BeFalse");
-			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 		}
 
 		private class TestClass

@@ -22,7 +22,6 @@ namespace MuonLab.Validation.Tests.SemanticString
 			var validationReport = this.validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("ValidEmail");
-			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 		}
 
 		[Test]
@@ -33,13 +32,12 @@ namespace MuonLab.Validation.Tests.SemanticString
 			var validationReport = this.validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("ValidEmail");
-			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 		}
 
 		[Test]
 		public void ensure_valid_email_passes_validation()
 		{
-			var testClass = new TestClass("andrew.bullock@north-51.com");
+			var testClass = new TestClass("trullock@gmail.com");
 
 			var validationReport = this.validator.Validate(testClass);
 
@@ -49,21 +47,19 @@ namespace MuonLab.Validation.Tests.SemanticString
 		[Test]
 		public void ensure_invalid_email2_fails_validation()
 		{
-			var testClass = new TestClass("andrew.bullock.north-51.com");
+			var testClass = new TestClass("trullock@gmail@com");
 			var validationReport = this.validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("ValidEmail");
-			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 		}
 
 		[Test]
 		public void ensure_invalid_email3_fails_validation()
 		{
-			var testClass = new TestClass("www.north-51.com");
+			var testClass = new TestClass("muonlab.com");
 			var validationReport = this.validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("ValidEmail");
-			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 		}
 
 		private class TestClass

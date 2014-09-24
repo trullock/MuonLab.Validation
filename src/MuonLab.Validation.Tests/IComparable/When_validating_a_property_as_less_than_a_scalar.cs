@@ -34,7 +34,6 @@ namespace MuonLab.Validation.Tests.IComparable
 			var violations = validationReport.Violations.ToArray();
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("LessThan");
-			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 			validationReport.Violations.First().Error.Replacements["arg0"].ShouldEqual("4");
 		}
 
@@ -46,7 +45,6 @@ namespace MuonLab.Validation.Tests.IComparable
 			var validationReport = this.validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("LessThan");
-			validationReport.Violations.First().Error.Replacements["prop"].ShouldEqual("value");
 			validationReport.Violations.First().Error.Replacements["arg0"].ShouldEqual("4");
 		}
 

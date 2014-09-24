@@ -49,7 +49,6 @@ namespace MuonLab.Validation
 		{
 			var replacements = new Dictionary<string, string>
 			{
-				{ "prop", this.GetMemberName(this.property) },
 				{ "val", ReferenceEquals(value, null) ? "NULL" : value.ToString() }
 			};
 
