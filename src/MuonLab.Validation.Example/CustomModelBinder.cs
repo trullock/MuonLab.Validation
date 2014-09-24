@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Web.Mvc;
 using MuonLab.Validation.Example.ViewModels;
 
@@ -25,11 +26,12 @@ namespace MuonLab.Validation.Example
 			if (!validationReport.IsValid)
 			{
 				var violationPropertyNameResolver = new MvcViolationPropertyNameResolver();
+				var errorMessageResolver = new ResourceErrorMessageResolver();
 
 				foreach (var violation in validationReport.Violations)
 				{
 					// add errors to modelstate
-					bindingContext.ModelState.AddModelError(violationPropertyNameResolver.ResolvePropertyName(violation), violation.Error.Key);
+					bindingContext.ModelState.AddModelError(violationPropertyNameResolver.ResolvePropertyName(violation), errorMessageResolver.GetErrorMessage(violation.Error.Key, new CultureInfo("de")));
 				}
 			}
 

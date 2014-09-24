@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -13,3 +14,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.1.0.0")]
 [assembly: CLSCompliant(true)]
 [assembly: InternalsVisibleTo("MuonLab.Validation.Tests")]
+[assembly: NeutralResourcesLanguage("en")]

@@ -86,6 +86,7 @@
     <Compile Include="ICollectionCondition.cs" />
     <Compile Include="ICondition.cs" />
     <Compile Include="EmailValidator.cs" />
+    <Compile Include="IErrorMessageResolver.cs" />
     <Compile Include="IValidationRule.cs" />
     <Compile Include="IValidator.cs" />
     <Compile Include="IViolation.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="PropertyCondition.cs" />
     <Compile Include="PropertyValidationRule.cs" />
     <Compile Include="ReflectionHelper.cs" />
+    <Compile Include="ResourceErrorMessageResolver.cs" />
     <Compile Include="ValidationException.cs" />
     <Compile Include="ValidationReport.cs" />
     <Compile Include="Validator.cs" />
@@ -119,6 +121,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ErrorMessages.de.resx" />
     <EmbeddedResource Include="ErrorMessages.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
