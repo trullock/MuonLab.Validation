@@ -29,9 +29,9 @@ namespace MuonLab.Validation
 
 		protected IViolation CreateViolation(string errorKey, IEnumerable<TValue> value, T entity, Expression property)
 		{
-			var replacements = new Dictionary<string, string>
+			var replacements = new Dictionary<string, ErrorDescriptior.Replacement>
 			{
-				{ "val", ReferenceEquals(value, null) ? "NULL" : value.ToString() }
+				{ "val", new ErrorDescriptior.Replacement(ErrorDescriptior.Replacement.ReplacementType.Scalar, ReferenceEquals(value, null) ? "NULL" : value.ToString()) }
 			};
 
 			for (var i = 1; i < this.Condition.Arguments.Count; i++)
@@ -40,26 +40,15 @@ namespace MuonLab.Validation
 			return new Violation(new ErrorDescriptior(errorKey, replacements), property, value);
 		}
 
-		protected string GetMemberName(MemberExpression member)
-		{
-			if (this.property.Member.DeclaringType.IsGenericType && this.property.Member.DeclaringType.GetGenericTypeDefinition() == typeof(Nullable<>))
-			{
-				if (member.Expression is MemberExpression)
-					return (member.Expression as MemberExpression).Member.GetEnglishName();
-			}
-
-			return member.Member.GetEnglishName();
-		}
-
-		protected string EvaluateExpression(Expression expression, T entity)
+		protected ErrorDescriptior.Replacement EvaluateExpression(Expression expression, T entity)
 		{
 			if (expression is MemberExpression)
-				return this.GetMemberName(expression as MemberExpression);
+				return new ErrorDescriptior.Replacement(ErrorDescriptior.Replacement.ReplacementType.Member, expression as MemberExpression);
 
 			var lambda = Expression.Lambda(expression, this.validationExpression.Parameters[0]);
 			var value = lambda.Compile().DynamicInvoke(entity);
 
-			return value != null ? value.ToString() : "NULL";
+			return new ErrorDescriptior.Replacement(ErrorDescriptior.Replacement.ReplacementType.Scalar, value != null ? value.ToString() : "NULL");
 		}
 	}
 }

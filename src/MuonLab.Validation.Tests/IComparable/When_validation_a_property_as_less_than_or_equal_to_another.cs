@@ -32,7 +32,7 @@ namespace MuonLab.Validation.Tests.IComparable
 			var validationReport = this.validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("LessThanEq");
-			validationReport.Violations.First().Error.Replacements["arg0"].ShouldEqual("Value 2");
+			validationReport.Violations.First().Error.Replacements["arg0"].Value.ToString().ShouldEqual("x.Value2");
 		}
 
 		[Test]

@@ -100,34 +100,5 @@ namespace MuonLab.Validation
 		{
 			return self ? "Yes" : "No";
 		}
-
-		/// <summary>
-		/// Gets an english version of a property's name, examining the EnglishName attribute if present
-		/// </summary>
-		/// <param name="info"></param>
-		/// <returns></returns>
-		public static string GetEnglishName(this MemberInfo info)
-		{
-            return info.Name.ToEnglish();
-		}
-
-		/// <summary>
-		/// Gets the english version of a type's name. For nullable types, the underlying type name is returned
-		/// </summary>
-		/// <param name="type"></param>
-		/// <returns></returns>
-		public static string GetEnglishName(this Type type)
-		{
-			Type propType;
-			if ((type.IsGenericType && type.GetGenericTypeDefinition().Equals(typeof(Nullable<>))))
-			{
-				var nc = new NullableConverter(type);
-				propType = nc.UnderlyingType;
-			}
-			else
-				propType = type;
-
-			return propType.Name.ToLower();
-		}
 	}
 }

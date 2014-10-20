@@ -14,17 +14,19 @@ namespace MuonLab.Validation
 			this.defaultCulture = CultureInfo.CreateSpecificCulture("en");
 		}
 
-		public string GetErrorMessage(string key, CultureInfo culture)
+		public string GetErrorMessage(ErrorDescriptior error, CultureInfo culture)
 		{
-			var message = this.resourceManager.GetString(key, culture);
+			// TODO: merge {val} and {argX}s
+
+			var message = this.resourceManager.GetString(error.Key, culture);
 			if (!string.IsNullOrEmpty(message))
 				return message;
 
-			message = this.resourceManager.GetString(key, this.defaultCulture);
+			message = this.resourceManager.GetString(error.Key, this.defaultCulture);
 			if (!string.IsNullOrEmpty(message))
 				return message;
 
-			return key;
+			return error.Key;
 		}
 	}
 }

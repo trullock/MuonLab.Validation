@@ -22,7 +22,7 @@ namespace MuonLab.Validation.Tests
 			var validationReport = this.validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("EqualTo");
-			validationReport.Violations.First().Error.Replacements["arg0"].ShouldEqual("1");
+			validationReport.Violations.First().Error.Replacements["arg0"].Value.ShouldEqual("1");
 
 			validationReport.Violations.Count().ShouldEqual(1);
 		}
@@ -35,7 +35,7 @@ namespace MuonLab.Validation.Tests
 			var validationReport = this.validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("EqualTo");
-			validationReport.Violations.First().Error.Replacements["arg0"].ShouldEqual("3");
+			validationReport.Violations.First().Error.Replacements["arg0"].Value.ShouldEqual("3");
 			validationReport.Violations.Count().ShouldEqual(1);
 		}
 

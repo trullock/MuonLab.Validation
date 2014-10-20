@@ -1,4 +1,8 @@
+using System;
+using System.ComponentModel;
 using System.Globalization;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Web.Mvc;
 using MuonLab.Validation.Example.ViewModels;
 
@@ -31,7 +35,7 @@ namespace MuonLab.Validation.Example
 				foreach (var violation in validationReport.Violations)
 				{
 					// add errors to modelstate
-					bindingContext.ModelState.AddModelError(violationPropertyNameResolver.ResolvePropertyName(violation), errorMessageResolver.GetErrorMessage(violation.Error.Key, new CultureInfo("de")));
+					bindingContext.ModelState.AddModelError(violationPropertyNameResolver.ResolvePropertyName(violation), errorMessageResolver.GetErrorMessage(violation.Error, new CultureInfo("de")));
 				}
 			}
 
