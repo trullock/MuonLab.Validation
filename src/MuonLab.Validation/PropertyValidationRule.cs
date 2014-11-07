@@ -47,26 +47,26 @@ namespace MuonLab.Validation
 
 		protected IViolation CreateViolation(string errorKey, TValue value, T entity, Expression property)
 		{
-			var replacements = new Dictionary<string, ErrorDescriptior.Replacement>
+			var replacements = new Dictionary<string, ErrorDescriptor.Replacement>
 			{
-				{ "val", new ErrorDescriptior.Replacement(ErrorDescriptior.Replacement.ReplacementType.Scalar, ReferenceEquals(entity, null) ? "NULL" : entity.ToString()) }
+				{ "val", new ErrorDescriptor.Replacement(ErrorDescriptor.Replacement.ReplacementType.Scalar, ReferenceEquals(entity, null) ? "NULL" : entity.ToString()) }
 			};
 
 			for (var i = 1; i < this.Condition.Arguments.Count; i++)
 				replacements.Add("arg" + (i - 1), this.EvaluateExpression(this.Condition.Arguments[i], entity));
 
-			return new Violation(new ErrorDescriptior(errorKey, replacements), property, value);
+			return new Violation(new ErrorDescriptor(errorKey, replacements), property, value);
 		}
 		
-		protected ErrorDescriptior.Replacement EvaluateExpression(Expression expression, T entity)
+		protected ErrorDescriptor.Replacement EvaluateExpression(Expression expression, T entity)
 		{
 			if (expression is MemberExpression)
-				return new ErrorDescriptior.Replacement(ErrorDescriptior.Replacement.ReplacementType.Member, expression as MemberExpression);
+				return new ErrorDescriptor.Replacement(ErrorDescriptor.Replacement.ReplacementType.Member, expression as MemberExpression);
 
 			var lambda = Expression.Lambda(expression, this.validationExpression.Parameters[0]);
 			var value = lambda.Compile().DynamicInvoke(entity);
 
-			return new ErrorDescriptior.Replacement(ErrorDescriptior.Replacement.ReplacementType.Scalar, value != null ? value.ToString() : "NULL");
+			return new ErrorDescriptor.Replacement(ErrorDescriptor.Replacement.ReplacementType.Scalar, value != null ? value.ToString() : "NULL");
 		}
 	}
 }

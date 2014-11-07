@@ -70,7 +70,7 @@
     <Compile Include="ConditionalValidationRule.cs" />
     <Compile Include="ChildListValidationRule.cs" />
     <Compile Include="AnyValidationRule.cs" />
-    <Compile Include="ErrorDescriptior.cs" />
+    <Compile Include="ErrorDescriptor.cs" />
     <Compile Include="Extensions\EnglishExtensions.cs" />
     <Compile Include="ExpressionHelper.cs" />
     <Compile Include="ExpressionRewriter.cs" />

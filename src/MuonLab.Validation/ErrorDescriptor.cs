@@ -4,12 +4,12 @@ using System.Linq.Expressions;
 
 namespace MuonLab.Validation
 {
-	public sealed class ErrorDescriptior
+	public sealed class ErrorDescriptor
 	{
 		public readonly string Key;
 		public readonly IDictionary<string, Replacement> Replacements;
 
-		public ErrorDescriptior(string key, IDictionary<string, Replacement> replacements)
+		public ErrorDescriptor(string key, IDictionary<string, Replacement> replacements)
 		{
 			this.Key = key;
 			this.Replacements = replacements;

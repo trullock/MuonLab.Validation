@@ -4,6 +4,6 @@ namespace MuonLab.Validation
 {
 	public interface IErrorMessageResolver
 	{
-		string GetErrorMessage(ErrorDescriptior error, CultureInfo culture);
+		string GetErrorMessage(ErrorDescriptor error, CultureInfo culture);
 	}
 }

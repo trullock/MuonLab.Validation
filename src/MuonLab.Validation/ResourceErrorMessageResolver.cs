@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.Linq;
 using System.Resources;
 
 namespace MuonLab.Validation
@@ -15,7 +14,7 @@ namespace MuonLab.Validation
 			this.defaultCulture = CultureInfo.CreateSpecificCulture("en");
 		}
 
-		public string GetErrorMessage(ErrorDescriptior error, CultureInfo culture)
+		public string GetErrorMessage(ErrorDescriptor error, CultureInfo culture)
 		{
 			// TODO: merge {val} and {argX}s
 
