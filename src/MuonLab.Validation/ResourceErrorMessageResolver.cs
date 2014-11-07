@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Linq;
 using System.Resources;
 
 namespace MuonLab.Validation
@@ -19,14 +20,17 @@ namespace MuonLab.Validation
 			// TODO: merge {val} and {argX}s
 
 			var message = this.resourceManager.GetString(error.Key, culture);
-			if (!string.IsNullOrEmpty(message))
-				return message;
+			if (string.IsNullOrEmpty(message))
+				message = this.resourceManager.GetString(error.Key, this.defaultCulture);
 
-			message = this.resourceManager.GetString(error.Key, this.defaultCulture);
-			if (!string.IsNullOrEmpty(message))
-				return message;
+			if (string.IsNullOrEmpty(message))
+				return error.Key;
 
-			return error.Key;
+			foreach (var replacement in error.Replacements)
+			{
+				message = message.Replace("{" + replacement.Key + "}", replacement.Value.ToString());
+			}
+			return message;
 		}
 	}
 }

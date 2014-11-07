@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace MuonLab.Validation
 {
@@ -28,6 +30,19 @@ namespace MuonLab.Validation
 			{
 				Scalar = 1,
 				Member = 2
+			}
+
+			public override string ToString()
+			{
+				switch (Type)
+				{
+					case ReplacementType.Scalar:
+						return Value.ToString();
+					case ReplacementType.Member:
+						return ((MemberExpression)Value).Member.Name;
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
 			}
 		}
 	}
