@@ -16,8 +16,6 @@ namespace MuonLab.Validation
 
 		public string GetErrorMessage(ErrorDescriptor error, CultureInfo culture)
 		{
-			// TODO: merge {val} and {argX}s
-
 			var message = this.resourceManager.GetString(error.Key, culture);
 			if (string.IsNullOrEmpty(message))
 				message = this.resourceManager.GetString(error.Key, this.defaultCulture);
