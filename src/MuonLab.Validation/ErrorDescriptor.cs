@@ -41,7 +41,7 @@ namespace MuonLab.Validation
 					case ReplacementType.Member:
 						return ((MemberExpression)Value).Member.Name;
 					default:
-						throw new ArgumentOutOfRangeException();
+						throw new NotSupportedException("Replacement type `" + Type + "` is not supported");
 				}
 			}
 		}

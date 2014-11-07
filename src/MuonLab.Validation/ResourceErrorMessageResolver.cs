@@ -24,9 +24,8 @@ namespace MuonLab.Validation
 				return error.Key;
 
 			foreach (var replacement in error.Replacements)
-			{
 				message = message.Replace("{" + replacement.Key + "}", replacement.Value.ToString());
-			}
+
 			return message;
 		}
 	}
