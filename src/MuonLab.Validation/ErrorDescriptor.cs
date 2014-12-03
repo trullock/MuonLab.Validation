@@ -9,6 +9,10 @@ namespace MuonLab.Validation
 		public readonly string Key;
 		public readonly IDictionary<string, Replacement> Replacements;
 
+		public ErrorDescriptor(string key) : this(key, new Dictionary<string, Replacement>())
+		{
+		}
+
 		public ErrorDescriptor(string key, IDictionary<string, Replacement> replacements)
 		{
 			this.Key = key;
