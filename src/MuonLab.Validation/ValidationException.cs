@@ -1,19 +1,24 @@
 using System;
+using System.Runtime.Serialization;
 
 namespace MuonLab.Validation
 {
+	[Serializable]
 	public sealed class ValidationException : Exception
 	{
 		public ValidationReport Report { get; private set; }
-
-		internal ValidationException(ValidationReport report)
+		public ValidationException(ValidationReport report)
 		{
 			this.Report = report;
 		}
 
-		internal ValidationException(IViolation violation)
+		public ValidationException(IViolation violation)
 		{
 			this.Report = new ValidationReport(new[] {violation});
+		}
+
+		protected ValidationException(SerializationInfo info, StreamingContext context) : base(info, context)
+		{
 		}
 	}
 }

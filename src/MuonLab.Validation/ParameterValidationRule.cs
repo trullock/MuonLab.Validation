@@ -16,20 +16,32 @@ namespace MuonLab.Validation
 		{
 			var condition = this.validationExpression.Compile().Invoke(entity) as PropertyCondition<T>;
 
-			var valid = condition.Condition.Invoke(entity);
+			bool valid;
+
+			try
+			{
+				valid = condition.Condition.Invoke(entity);
+			}
+			catch (Exception e)
+			{
+				if (prefix != null)
+					return new[] { this.CreateViolation("ValidationError", entity, prefix) };
+
+				return new[] { this.CreateViolation("ValidationError", entity, this.PropertyExpression) };
+			}
 
 			if (!valid)
 			{
 				if (prefix != null)
-					return new[] {this.CreateViolation(condition, entity, prefix)};
+					return new[] {this.CreateViolation(condition.ErrorKey, entity, prefix)};
 				
-				return new[] {this.CreateViolation(condition, entity, this.PropertyExpression)};
+				return new[] {this.CreateViolation(condition.ErrorKey, entity, this.PropertyExpression)};
 			}
 			
 			return new IViolation[0];
 		}
 
-		protected IViolation CreateViolation(PropertyCondition<T> condition, T entity, Expression property)
+		IViolation CreateViolation(string errorKey, T entity, Expression property)
 		{
 			var replacements = new Dictionary<string, ErrorDescriptor.Replacement>
 			{
@@ -39,10 +51,10 @@ namespace MuonLab.Validation
 			for (var i = 1; i < this.Condition.Arguments.Count; i++)
 				replacements.Add("arg" + (i - 1), this.EvaluateExpression(this.Condition.Arguments[i], entity));
 
-			return new Violation(new ErrorDescriptor(condition.ErrorKey, replacements), property, entity);
+			return new Violation(new ErrorDescriptor(errorKey, replacements), property, entity);
 		}
 
-		protected ErrorDescriptor.Replacement EvaluateExpression(Expression expression, T entity)
+		ErrorDescriptor.Replacement EvaluateExpression(Expression expression, T entity)
 		{
 			if (expression is MemberExpression)
 				return new ErrorDescriptor.Replacement(ErrorDescriptor.Replacement.ReplacementType.Member, expression as MemberExpression);

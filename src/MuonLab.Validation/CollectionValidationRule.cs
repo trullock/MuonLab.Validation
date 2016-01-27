@@ -27,7 +27,7 @@ namespace MuonLab.Validation
 			return expressions.Select(expression => this.CreateViolation(propertyCondition.ErrorKey, value, entity, expression)).ToArray();
 		}
 
-		protected IViolation CreateViolation(string errorKey, IEnumerable<TValue> value, T entity, Expression property)
+		IViolation CreateViolation(string errorKey, IEnumerable<TValue> value, T entity, Expression property)
 		{
 			var replacements = new Dictionary<string, ErrorDescriptor.Replacement>
 			{
@@ -40,7 +40,7 @@ namespace MuonLab.Validation
 			return new Violation(new ErrorDescriptor(errorKey, replacements), property, value);
 		}
 
-		protected ErrorDescriptor.Replacement EvaluateExpression(Expression expression, T entity)
+		ErrorDescriptor.Replacement EvaluateExpression(Expression expression, T entity)
 		{
 			if (expression is MemberExpression)
 				return new ErrorDescriptor.Replacement(ErrorDescriptor.Replacement.ReplacementType.Member, expression as MemberExpression);

@@ -6,7 +6,8 @@ namespace MuonLab.Validation
 {
 	sealed class PropertyValidationRule<T, TValue> : BaseValidationRule<T, TValue>
 	{
-		public PropertyValidationRule(Expression<Func<T, ICondition<TValue>>> validationExpression) : base(validationExpression)
+		public PropertyValidationRule(Expression<Func<T, ICondition<TValue>>> validationExpression)
+			: base(validationExpression)
 		{
 			this.property = this.Condition.Arguments[0] as MemberExpression;
 			this.PropertyExpression = Expression.Lambda<Func<T, TValue>>(this.property, this.FindParameter(this.property));
@@ -24,28 +25,36 @@ namespace MuonLab.Validation
 				propExpr = combinedExpression;
 			}
 			else
+			{
 				propExpr = this.PropertyExpression;
+			}
 
 			var value = this.PropertyExpression.Compile().Invoke(entity);
 
-			bool valid;
+			var valid = false;
 
 			try
 			{
 				valid = condition.Condition.Invoke(value);
-			} 
-			catch(NullReferenceException)
+			}
+			catch (NullReferenceException)
 			{
-				throw new ArgumentException("Unable to validate " + propExpr + " some part of the chain is null.\n\nValidation Expression: " + this.validationExpression + "\n\nEntity: " + entity);
+				throw new ArgumentException("Unable to validate " + propExpr +
+				                            " some part of the chain is null.\n\nValidation Expression: " +
+				                            this.validationExpression + "\n\nEntity: " + entity);
+			}
+			catch (Exception e)
+			{
+				return new[] { this.CreateViolation("ValidationError", value, entity, propExpr) };
 			}
 
 			if (valid)
 				return new IViolation[0];
-			
-			return new[] {this.CreateViolation(condition.ErrorKey, value, entity, propExpr)};				
+
+			return new[] {this.CreateViolation(condition.ErrorKey, value, entity, propExpr)};
 		}
 
-		protected IViolation CreateViolation(string errorKey, TValue value, T entity, Expression property)
+		IViolation CreateViolation(string errorKey, TValue value, T entity, Expression property)
 		{
 			var replacements = new Dictionary<string, ErrorDescriptor.Replacement>
 			{
@@ -57,16 +66,18 @@ namespace MuonLab.Validation
 
 			return new Violation(new ErrorDescriptor(errorKey, replacements), property, value);
 		}
-		
-		protected ErrorDescriptor.Replacement EvaluateExpression(Expression expression, T entity)
+
+		ErrorDescriptor.Replacement EvaluateExpression(Expression expression, T entity)
 		{
 			if (expression is MemberExpression)
-				return new ErrorDescriptor.Replacement(ErrorDescriptor.Replacement.ReplacementType.Member, expression as MemberExpression);
+				return new ErrorDescriptor.Replacement(ErrorDescriptor.Replacement.ReplacementType.Member,
+					expression as MemberExpression);
 
 			var lambda = Expression.Lambda(expression, this.validationExpression.Parameters[0]);
 			var value = lambda.Compile().DynamicInvoke(entity);
 
-			return new ErrorDescriptor.Replacement(ErrorDescriptor.Replacement.ReplacementType.Scalar, value != null ? value.ToString() : "NULL");
+			return new ErrorDescriptor.Replacement(ErrorDescriptor.Replacement.ReplacementType.Scalar,
+				value != null ? value.ToString() : "NULL");
 		}
 	}
 }
