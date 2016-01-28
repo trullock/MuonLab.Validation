@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace MuonLab.Validation
 {
-	static class ReflectionHelper
+	public static class ReflectionHelper
     {
         public static string GetPropertyName<T, TResult>(Expression<Func<T, TResult>> property)
         {
@@ -47,7 +47,7 @@ namespace MuonLab.Validation
                 return propertyChainToString(memberExpression.Body, delimeter).TrimEnd(delimeter);
             }
 
-            throw new NotSupportedException("Probably a nullable type, need implementing! Debug: " + expression);
+            throw new NotSupportedException("Probably a nullable type, need implementing! Debug: `" + expression + "`");
         }
 
 		public static string propertyChainToString(Expression expression, char delimeter)

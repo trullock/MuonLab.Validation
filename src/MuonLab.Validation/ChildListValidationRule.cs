@@ -45,11 +45,7 @@ namespace MuonLab.Validation
 			var lambda = Expression.Lambda(this.Condition.Arguments[1], this.validationExpression.Parameters[0]);
 			var validator = lambda.Compile().DynamicInvoke(entity) as IValidator<TValue>;
 
-
 			var list = value as IList;
-
-			if (prefix != null)
-				throw new NotSupportedException("prefixes with list validation rules are not supported. send me a patch. kthx");
 
 			var violations = new List<IViolation>();
 
@@ -57,10 +53,19 @@ namespace MuonLab.Validation
 			{
 				var j = i;
 
+				ValidationReport report;
 
-				var indexer = this.PropertyExpression.Combine(xs => xs[j], true);
-				var report = validator.Validate(value[i], indexer);
-
+				if (prefix != null)
+				{
+					var indexer = prefix.Combine(this.PropertyExpression.Combine(xs => xs[j], true), true);
+					report = validator.Validate(value[i], indexer);
+				}
+				else
+				{
+					var indexer = this.PropertyExpression.Combine(xs => xs[j], true);
+					report = validator.Validate(value[i], indexer);
+				}
+				
 				violations.AddRange(report.Violations);
 			}
 

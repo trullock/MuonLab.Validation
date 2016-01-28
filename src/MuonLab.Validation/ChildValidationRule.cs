@@ -31,7 +31,7 @@ namespace MuonLab.Validation
 			}
 			else
 			{
-				report = validator.Validate(value, PropertyExpression);
+				report = validator.Validate(value, this.PropertyExpression);
 			}
 
 			
