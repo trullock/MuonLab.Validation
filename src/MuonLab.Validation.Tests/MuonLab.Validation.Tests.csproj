@@ -68,6 +68,7 @@
     <Compile Include="Nullable\When_validating_a_nullable_property.cs" />
     <Compile Include="Nullable\When_validating_a_nullable_property_as_greaterthan.cs" />
     <Compile Include="Exceptions\When_failing_to_validate_a_parameter.cs" />
+    <Compile Include="String\When_validating_a_property_as_not_equal_to.cs" />
     <Compile Include="when_nesting_validation.cs" />
     <Compile Include="when_nesting_validation_arrays.cs" />
     <Compile Include="when_validating_with_an_ANY_rule.cs" />
