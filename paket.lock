@@ -8,8 +8,9 @@ NUGET
       Microsoft.AspNet.Razor (>= 3.2.3 < 3.3)
       Microsoft.Web.Infrastructure (>= 1.0)
     Microsoft.Web.Infrastructure (1.0)
+    NUnit (2.6.4)
 
-GROUP Build
+GROUP BuildTools
 NUGET
   remote: https://www.nuget.org/api/v2
-    NUnit (2.6.4)
+    NUnit.Runners (2.6.4)
