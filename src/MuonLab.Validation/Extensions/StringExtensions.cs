@@ -146,5 +146,18 @@ namespace MuonLab.Validation
 		{
 			return self.Satisfies(s => (s == null && value == null) || (s != null && s.Equals(value, comparison)), errorKey);
 		}
+
+		/// <summary>
+		/// Ensure the property matches a value with the given string comparison
+		/// </summary>
+		/// <param name="self"></param>
+		/// <param name="value">The value to not be equal to</param>
+		/// <param name="comparison">The string comparison method</param>
+		/// <param name="errorKey">The error message</param>
+		/// <returns></returns>
+		public static ICondition<string> IsNotEqualTo(this string self, string value, StringComparison comparison, string errorKey)
+		{
+			return self.Satisfies(s => (s == null && value != null) || (s != null && !s.Equals(value, comparison)), errorKey);
+		}
 	}
 }

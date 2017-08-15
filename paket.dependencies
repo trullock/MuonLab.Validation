@@ -1,0 +1,10 @@
+source https://www.nuget.org/api/v2
+
+nuget Microsoft.Web.Infrastructure
+nuget Microsoft.AspNet.Mvc = 3.0.20105.1
+nuget NUnit = 2.6.4
+
+group BuildTools
+source https://www.nuget.org/api/v2
+
+nuget NUnit.Runners 2.6.4
