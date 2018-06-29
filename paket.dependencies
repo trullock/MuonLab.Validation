@@ -7,4 +7,4 @@ nuget NUnit = 2.6.4
 group BuildTools
 source https://www.nuget.org/api/v2
 
-nuget NUnit.Runners 2.6.4
+nuget NUnit.Runners.Net4 2.6.4
