@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnsureAsync\When_validating_a_property_as_false.cs" />
     <Compile Include="Boolean\When_validating_a_property_as_false.cs" />
     <Compile Include="Boolean\When_validating_a_property_as_true.cs" />
     <Compile Include="Enumerables\When_validating_no_duplicates.cs" />
