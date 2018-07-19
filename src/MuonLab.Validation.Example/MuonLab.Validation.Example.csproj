@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MuonLab.Validation.Example</RootNamespace>
     <AssemblyName>MuonLab.Validation.Example</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -85,7 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MuonLab.Validation\MuonLab.Validation.csproj">
-      <Project>{0B48AFFA-3213-42DC-8B4F-4D1696C35412}</Project>
+      <Project>{66ec11a2-107b-4d9a-b1cb-2c9a3db4e303}</Project>
       <Name>MuonLab.Validation</Name>
     </ProjectReference>
   </ItemGroup>

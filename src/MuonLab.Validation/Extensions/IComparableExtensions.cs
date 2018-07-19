@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 
 // ReSharper disable once CheckNamespace
 namespace MuonLab.Validation
@@ -28,7 +28,7 @@ namespace MuonLab.Validation
 		/// <returns></returns>
 		public static ICondition<TValue> IsGreaterThan<TValue>(this TValue self, TValue comparison, string errorKey) where TValue : IComparable
 		{
-			return self.Satisfies(x => Comparer.Default.Compare(x, comparison) > 0, errorKey);
+			return self.Satisfies(x => Comparer<TValue>.Default.Compare(x, comparison) > 0, errorKey);
 		}
 
 		/// <summary>
@@ -53,7 +53,7 @@ namespace MuonLab.Validation
 		/// <returns></returns>
 		public static ICondition<TValue> IsGreaterThanOrEqualTo<TValue>(this TValue self, TValue comparison, string errorKey) where TValue : IComparable
 		{
-			return self.Satisfies(x => Comparer.Default.Compare(x, comparison) >= 0, errorKey);
+			return self.Satisfies(x => Comparer<TValue>.Default.Compare(x, comparison) >= 0, errorKey);
 		}
 
 		/// <summary>
@@ -78,7 +78,7 @@ namespace MuonLab.Validation
 		/// <returns></returns>
 		public static ICondition<TValue> IsEqualTo<TValue>(this TValue self, TValue comparison, string errorKey) where TValue : IComparable
 		{
-			return self.Satisfies(x => Comparer.Default.Compare(x, comparison) == 0, errorKey);
+			return self.Satisfies(x => Comparer<TValue>.Default.Compare(x, comparison) == 0, errorKey);
 		}
 
 		/// <summary>
@@ -103,7 +103,7 @@ namespace MuonLab.Validation
 		/// <returns></returns>
 		public static ICondition<TValue> IsNotEqualTo<TValue>(this TValue self, TValue comparison, string errorKey) where TValue : IComparable
 		{
-			return self.Satisfies(x => Comparer.Default.Compare(x, comparison) != 0, errorKey);
+			return self.Satisfies(x => Comparer<TValue>.Default.Compare(x, comparison) != 0, errorKey);
 		}
 
 
@@ -131,7 +131,7 @@ namespace MuonLab.Validation
 		/// <returns></returns>
 		public static ICondition<TValue> IsBetween<TValue>(this TValue self, TValue lower, TValue upper, string errorKey) where TValue : IComparable
 		{
-			return self.Satisfies(x => Comparer.Default.Compare(x, lower) >= 0 && Comparer.Default.Compare(x, upper) <= 0, errorKey);
+			return self.Satisfies(x => Comparer<TValue>.Default.Compare(x, lower) >= 0 && Comparer<TValue>.Default.Compare(x, upper) <= 0, errorKey);
 		}
 
 
@@ -157,7 +157,7 @@ namespace MuonLab.Validation
 		/// <returns></returns>
 		public static ICondition<TValue> IsLessThan<TValue>(this TValue self, TValue comparison, string errorKey) where TValue : IComparable
 		{
-			return self.Satisfies(x => Comparer.Default.Compare(x, comparison) < 0, errorKey);
+			return self.Satisfies(x => Comparer<TValue>.Default.Compare(x, comparison) < 0, errorKey);
 		}
 
 		/// <summary>
@@ -182,7 +182,7 @@ namespace MuonLab.Validation
 		/// <returns></returns>
 		public static ICondition<TValue> IsLessThanOrEqualTo<TValue>(this TValue self, TValue comparison, string errorKey) where TValue : IComparable
 		{
-			return self.Satisfies(x => Comparer.Default.Compare(x, comparison) <= 0, errorKey);
+			return self.Satisfies(x => Comparer<TValue>.Default.Compare(x, comparison) <= 0, errorKey);
 		}
 	}
 }

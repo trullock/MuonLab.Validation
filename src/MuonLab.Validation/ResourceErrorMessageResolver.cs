@@ -11,7 +11,7 @@ namespace MuonLab.Validation
 		public ResourceErrorMessageResolver()
 		{
 			this.resourceManager = new ResourceManager("MuonLab.Validation.ErrorMessages", this.GetType().Assembly);
-			this.defaultCulture = CultureInfo.CreateSpecificCulture("en");
+			this.defaultCulture = new CultureInfo("en");
 		}
 
 		public string GetErrorMessage(ErrorDescriptor error, CultureInfo culture)
