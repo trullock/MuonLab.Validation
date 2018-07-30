@@ -5,20 +5,13 @@ namespace MuonLab.Validation.Tests.Nullable
 {
 	public class When_validating_a_nullable_property
 	{
-		private TestClassValidator validator;
-
-		[SetUp]
-		public void SetUp()
-		{
-			this.validator = new TestClassValidator();
-		}
-
 		[Fact]
 		public void ensure_false_returns_false()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(false);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("BeTrue");
 		}
@@ -26,9 +19,10 @@ namespace MuonLab.Validation.Tests.Nullable
 		[Fact]
 		public void ensure_true_returns_true()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(true);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.IsValid.ShouldBeTrue();
 		}
@@ -36,9 +30,10 @@ namespace MuonLab.Validation.Tests.Nullable
 		[Fact]
 		public void ensure_null_returns_true()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(null);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.IsValid.ShouldBeTrue();
 		}

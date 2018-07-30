@@ -5,40 +5,35 @@ namespace MuonLab.Validation.Tests.IComparable
 {
 	public class When_validating_a_property_as_not_equal_to_a_scalar
 	{
-		TestClassValidator validator;
-
-		[SetUp]
-		public void SetUp()
-		{
-			this.validator = new TestClassValidator();
-		}
-
 		[Fact]
 		public void test_1_not_equals_4_returns_true()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(1);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
-			Assert.IsTrue(validationReport.IsValid);
+			validationReport.IsValid.ShouldBeTrue();
 		}
 
 		[Fact]
 		public void test_8_not_equals_4_returns_true()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(8);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
-			Assert.IsTrue(validationReport.IsValid);
+			validationReport.IsValid.ShouldBeTrue();
 		}
 
 		[Fact]
 		public void test_4_not_equals_4_returns_false()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(4);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("NotEqualTo");
 			validationReport.Violations.First().Error.Replacements["arg0"].Value.ShouldEqual("4");

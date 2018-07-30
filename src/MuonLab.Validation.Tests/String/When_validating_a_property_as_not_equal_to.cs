@@ -6,22 +6,13 @@ namespace MuonLab.Validation.Tests.String
 {
 	public class When_validating_a_property_as_not_equal_to
 	{
-		private TestClassValidator validator;
-		private TestClassValidatorWithNullValueParameter validatorWithTestClassValidatorWithNull;
-
-		[SetUp]
-		public void SetUp()
-		{
-			this.validator = new TestClassValidator();
-			this.validatorWithTestClassValidatorWithNull = new TestClassValidatorWithNullValueParameter();
-		}
-
 		[Fact]
 		public void ensure_mismatch_fail_validation()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass("HeLlo");
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("error");
 		}
@@ -29,29 +20,32 @@ namespace MuonLab.Validation.Tests.String
 		[Fact]
 		public void ensure_match_passes_validation()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass("different");
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
-			Assert.IsTrue(validationReport.IsValid);
+			validationReport.IsValid.ShouldBeTrue();
 		}
 
 		[Fact]
 		public void ensure_one_null_value_pass_validation()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(null);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
-			Assert.IsTrue(validationReport.IsValid);
+			validationReport.IsValid.ShouldBeTrue();
 		}
 
 		[Fact]
 		public void ensure_matching_null_values_fail_validation()
 		{
+			var validatorWithTestClassValidatorWithNull = new TestClassValidatorWithNullValueParameter();
 			var testClass = new TestClass(null);
 
-			var validationReport = this.validatorWithTestClassValidatorWithNull.Validate(testClass);
+			var validationReport = validatorWithTestClassValidatorWithNull.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("error");
 		}

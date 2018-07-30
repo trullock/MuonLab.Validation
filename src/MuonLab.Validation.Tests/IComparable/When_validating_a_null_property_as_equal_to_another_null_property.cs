@@ -5,20 +5,13 @@ namespace MuonLab.Validation.Tests.IComparable
 {
 	public class When_validating_a_null_property_as_equal_to_another_null_property
 	{
-		private TestClassValidator validator;
-
-		[SetUp]
-		public void SetUp()
-		{
-			this.validator = new TestClassValidator();
-		}
-
 		[Fact]
 		public void should_be_valid()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass();
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.IsValid.ShouldBeTrue();
 		}

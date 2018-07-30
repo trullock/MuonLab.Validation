@@ -5,20 +5,13 @@ namespace MuonLab.Validation.Tests.Nullable
 {
 	public class When_validating_a_nullable_property_as_greaterthan
 	{
-		private TestClassValidator validator;
-
-		[SetUp]
-		public void SetUp()
-		{
-			this.validator = new TestClassValidator();
-		}
-
 		[Fact]
 		public void ensure_0_returns_false()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(0);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 			var violations = validationReport.Violations.ToArray();
 
 			violations[0].Error.Key.ShouldEqual("GreaterThanEq");
@@ -28,9 +21,10 @@ namespace MuonLab.Validation.Tests.Nullable
 		[Fact]
 		public void ensure_1_returns_true()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(1);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.IsValid.ShouldBeTrue();
 		}
@@ -38,9 +32,10 @@ namespace MuonLab.Validation.Tests.Nullable
 		[Fact]
 		public void ensure_null_returns_true()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(null);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.IsValid.ShouldBeTrue();
 		}

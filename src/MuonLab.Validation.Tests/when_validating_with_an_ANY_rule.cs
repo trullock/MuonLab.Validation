@@ -5,20 +5,13 @@ namespace MuonLab.Validation.Tests
 {
 	public class when_validating_with_an_ANY_rule
 	{
-		ConditionalValidator validator;
-
-		[SetUp]
-		public void SetUp()
-		{
-			this.validator = new ConditionalValidator();
-		}
-
 		[Fact]
 		public void when_the_first_condition_is_true_the_second_shoudlnt_be_run()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(1, 2);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.Violations.Count().ShouldEqual(0);
 		}
@@ -26,9 +19,10 @@ namespace MuonLab.Validation.Tests
 		[Fact]
 		public void when_the_first_condition_is_false_and_the_second_is_true_there_should_be_no_errors()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(2, 3);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.Violations.Count().ShouldEqual(0);
 		}
@@ -36,9 +30,10 @@ namespace MuonLab.Validation.Tests
 		[Fact]
 		public void whe_all_conditions_are_false_all_errors_should_show()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(0, 2);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.Violations.Count().ShouldEqual(2);
 		}
@@ -55,7 +50,7 @@ namespace MuonLab.Validation.Tests
 			}
 		}
 
-		class ConditionalValidator : Validator<TestClass>
+		class TestClassValidator : Validator<TestClass>
 		{
 			protected override void Rules()
 			{

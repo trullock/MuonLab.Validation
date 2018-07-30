@@ -11,7 +11,7 @@ namespace MuonLab.Validation.Tests
 
 			var validationReport = new ConditionalValidator(false).Validate(testClass);
 
-			Assert.IsTrue(validationReport.IsValid);
+			validationReport.IsValid.ShouldBeTrue();
 		}
 
 		[Fact]
@@ -21,7 +21,7 @@ namespace MuonLab.Validation.Tests
 
 			var validationReport = new ConditionalValidator(true).Validate(testClass);
 
-			Assert.IsFalse(validationReport.IsValid);
+			validationReport.IsValid.ShouldBeFalse();
 		}
 
 		private class TestClass

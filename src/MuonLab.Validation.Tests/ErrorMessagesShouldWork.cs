@@ -5,19 +5,11 @@ namespace MuonLab.Validation.Tests
 {
 	public class ErrorMessagesShouldWork
 	{
-		TestValidator validator;
-		ValidationReport report;
-
-		[SetUp]
-		public void SetUp()
-		{
-			this.validator = new TestValidator();
-			this.report = this.validator.Validate(new TestClass {Age = 12});
-		}
-
 		[Fact]
 		public void the_validation_report_should_be_valid()
 		{
+			var validator = new TestValidator();
+			var report = validator.Validate(new TestClass { Age = 12 });
 			report.Violations.First().Error.Key.ShouldEqual("Key");
 		}
 

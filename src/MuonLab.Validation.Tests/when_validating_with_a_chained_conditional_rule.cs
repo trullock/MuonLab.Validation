@@ -5,20 +5,13 @@ namespace MuonLab.Validation.Tests
 {
 	public class when_validating_with_a_chained_conditional_rule
 	{
-		private ConditionalValidator validator;
-
-		[SetUp]
-		public void SetUp()
-		{
-			this.validator = new ConditionalValidator();
-		}
-
 		[Fact]
 		public void when_a_condition_is_false_the_validation_rule_should_not_be_run_and_the_violation_should_appear()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(2, 2);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("EqualTo");
 			validationReport.Violations.First().Error.Replacements["arg0"].Value.ShouldEqual("1");
@@ -29,9 +22,10 @@ namespace MuonLab.Validation.Tests
 		[Fact]
 		public void when_a_condition_is_true_the_validation_rule_should_be_run()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(1, 2);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("EqualTo");
 			validationReport.Violations.First().Error.Replacements["arg0"].Value.ShouldEqual("3");
@@ -50,7 +44,7 @@ namespace MuonLab.Validation.Tests
 			}
 		}
 
-		private class ConditionalValidator : Validator<TestClass>
+		private class TestClassValidator : Validator<TestClass>
 		{
 			protected override void Rules()
 			{

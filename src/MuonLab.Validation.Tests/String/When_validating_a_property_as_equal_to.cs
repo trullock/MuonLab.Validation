@@ -6,20 +6,13 @@ namespace MuonLab.Validation.Tests.String
 {
 	public class When_validating_a_property_as_equal_to
 	{
-		private TestClassValidator validator;
-
-		[SetUp]
-		public void SetUp()
-		{
-			this.validator = new TestClassValidator();
-		}
-
 		[Fact]
 		public void ensure_mismatch_fail_validation()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass("different");
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("error");
 		}
@@ -28,11 +21,12 @@ namespace MuonLab.Validation.Tests.String
 		[Fact]
 		public void ensure_match_passes_validation()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass("HeLlO");
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
-			Assert.IsTrue(validationReport.IsValid);
+			validationReport.IsValid.ShouldBeTrue();
 		}
 
 

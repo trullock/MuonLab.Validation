@@ -5,20 +5,13 @@ namespace MuonLab.Validation.Tests.IComparable
 {
 	public class When_validating_a_property_as_equal_to_another
 	{
-		private TestClassValidator validator;
-
-		[SetUp]
-		public void SetUp()
-		{
-			this.validator = new TestClassValidator();
-		}
-
 		[Fact]
 		public void test_1_equals_4_returns_false()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(1, 4);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("EqualTo");
 			validationReport.Violations.First().Error.Replacements["arg0"].Value.ToString().ShouldEqual("x.Value2");
@@ -27,9 +20,10 @@ namespace MuonLab.Validation.Tests.IComparable
 		[Fact]
 		public void test_4_equals_1_returns_false()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(4, 1);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			var violations = validationReport.Violations.ToArray();
 
@@ -40,11 +34,12 @@ namespace MuonLab.Validation.Tests.IComparable
 		[Fact]
 		public void test_2_equals_2_returns_true()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(2, 2);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
-			Assert.IsTrue(validationReport.IsValid);
+			validationReport.IsValid.ShouldBeTrue();
 		}
 
 		private class TestClass

@@ -5,30 +5,24 @@ namespace MuonLab.Validation.Tests.Boolean
 {
 	public class When_validating_a_property_as_true
 	{
-		private TestClassValidator validator;
-
-		[SetUp]
-		public void SetUp()
-		{
-			this.validator = new TestClassValidator();
-		}
-
 		[Fact]
 		public void ensure_true_returns_true()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(true);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
-			Assert.IsTrue(validationReport.IsValid);
+			validationReport.IsValid.ShouldBeTrue();
 		}
 
 		[Fact]
 		public void ensure_false_returns_false()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(false);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			var violations = validationReport.Violations.ToArray();
 

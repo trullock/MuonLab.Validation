@@ -5,40 +5,35 @@ namespace MuonLab.Validation.Tests.IComparable
 {
 	public class When_validating_a_property_as_not_equal_to_another
 	{
-		private TestClassValidator validator;
-
-		[SetUp]
-		public void SetUp()
-		{
-			this.validator = new TestClassValidator();
-		}
-
 		[Fact]
 		public void test_1_not_equals_4_returns_true()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(1, 4);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
-			Assert.IsTrue(validationReport.IsValid);
+			validationReport.IsValid.ShouldBeTrue();
 		}
 
 		[Fact]
 		public void test_4_not_equals_1_returns_true()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(4, 1);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
-			Assert.IsTrue(validationReport.IsValid);
+			validationReport.IsValid.ShouldBeTrue();
 		}
 
 		[Fact]
 		public void test_2_not_equals_2_returns_false()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(2, 2);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("NotEqualTo");
 			validationReport.Violations.First().Error.Replacements["arg0"].Value.ToString().ShouldEqual("x.Value2");

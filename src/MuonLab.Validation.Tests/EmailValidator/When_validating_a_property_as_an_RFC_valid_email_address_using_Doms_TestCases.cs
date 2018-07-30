@@ -6,21 +6,14 @@ namespace MuonLab.Validation.Tests.EmailValidator
 {
 	public class When_validating_an_email_address
 	{
-		private XmlElement tests;
-
-		[SetUp]
-		public void SetUp()
-		{
-			var manifestResourceStream = this.GetType().Assembly
-				.GetManifestResourceStream("MuonLab.Validation.Tests.EmailValidator.tests.xml");
-			var xmlDocument = new XmlDocument();
-			xmlDocument.Load(manifestResourceStream);
-			this.tests = xmlDocument.DocumentElement;
-		}
-
 		[Fact]
 		public void ensure_common_things_work()
 		{
+			var manifestResourceStream = this.GetType().Assembly.GetManifestResourceStream("MuonLab.Validation.Tests.EmailValidator.tests.xml");
+			var xmlDocument = new XmlDocument();
+			xmlDocument.Load(manifestResourceStream);
+			var tests = xmlDocument.DocumentElement;
+
 			foreach (XmlElement test in tests.SelectNodes("test"))
 			{
 				var address = test.SelectSingleNode("address").InnerText;
@@ -29,7 +22,7 @@ namespace MuonLab.Validation.Tests.EmailValidator
 
 				var result = bool.Parse(test.SelectSingleNode("valid").InnerText);
 
-				Assert.AreEqual(result, new Validation.EmailValidator().IsEmailValid(address), address);
+				result.ShouldEqual(new Validation.EmailValidator().IsEmailValid(address));
 			}
 		}
 	}

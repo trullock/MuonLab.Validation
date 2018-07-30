@@ -5,30 +5,24 @@ namespace MuonLab.Validation.Tests.ReferenceType
 {
 	public class When_validating_a_property_as_not_null
 	{
-		private TestClassValidator validator;
-
-		[SetUp]
-		public void SetUp()
-		{
-			this.validator = new TestClassValidator();
-		}
-
 		[Fact]
 		public void ensure_not_null_returns_true()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(new object());
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
-			Assert.IsTrue(validationReport.IsValid);
+			validationReport.IsValid.ShouldBeTrue();
 		}
 
 		[Fact]
 		public void ensure_not_null_returns_false()
 		{
+			var validator = new TestClassValidator();
 			var testClass = new TestClass(null);
 
-			var validationReport = this.validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass);
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("Required");
 			validationReport.Violations.Skip(1).First().Error.Key.ShouldEqual("test key");
