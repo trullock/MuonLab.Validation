@@ -1,165 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{153980DB-6FDA-47F4-84A4-DB62739F00F7}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MuonLab.Validation.Tests</RootNamespace>
-    <AssemblyName>MuonLab.Validation.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0-preview-20170810-02" />
+    <PackageReference Include="NSubstitute" Version="3.1.0" />
+    <PackageReference Include="xunit" Version="2.2.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="EnsureAsync\When_validating_a_property_as_false.cs" />
-    <Compile Include="Boolean\When_validating_a_property_as_false.cs" />
-    <Compile Include="Boolean\When_validating_a_property_as_true.cs" />
-    <Compile Include="Enumerables\When_validating_no_duplicates.cs" />
-    <Compile Include="Nullable\When_validating_a_nullable_property.cs" />
-    <Compile Include="Nullable\When_validating_a_nullable_property_as_greaterthan.cs" />
-    <Compile Include="Exceptions\When_failing_to_validate_a_parameter.cs" />
-    <Compile Include="String\When_validating_a_property_as_not_equal_to.cs" />
-    <Compile Include="when_nesting_validation.cs" />
-    <Compile Include="when_nesting_validation_arrays.cs" />
-    <Compile Include="when_validating_with_an_ANY_rule.cs" />
-    <Compile Include="Enumerables\When_validating_complex_types.cs" />
-    <Compile Include="ErrorMessagesShouldWork.cs" />
-    <Compile Include="IComparable\When_validating_a_null_property_as_equal_to_another_null_property.cs" />
-    <Compile Include="NullProperties\when_validating_a_null_property.cs" />
-    <Compile Include="EmailValidator\When_validating_a_property_as_an_RFC_valid_email_address_using_Doms_TestCases.cs" />
-    <Compile Include="SemanticString\When_validating_a_property_as_an_RFC_valid_email_address.cs" />
-    <Compile Include="ShouldExtensions.cs" />
-    <Compile Include="String\When_validating_a_property_as_equal_to.cs" />
-    <Compile Include="when_conditionally_validating_against_the_parameter_with_no_property.cs" />
-    <Compile Include="IComparable\When_validating_a_property_as_not_equal_to_another.cs" />
-    <Compile Include="IComparable\When_validating_a_property_as_not_equal_to_a_scalar.cs" />
-    <Compile Include="when_validating_with_a_chained_conditional_rule.cs" />
-    <Compile Include="IComparable\When_validating_a_property_as_equal_to_another.cs" />
-    <Compile Include="IComparable\When_validating_a_property_as_equal_to_a_scalar.cs" />
-    <Compile Include="IComparable\when_validating_a_property_as_greater_than_another.cs" />
-    <Compile Include="IComparable\when_validating_a_property_as_greater_than_a_scalar.cs" />
-    <Compile Include="IComparable\When_validating_a_property_as_less_than_another.cs" />
-    <Compile Include="IComparable\When_validating_a_property_as_less_than_a_scalar.cs" />
-    <Compile Include="IComparable\When_validating_a_property_has_greater_than_or_equal_to_another.cs" />
-    <Compile Include="IComparable\When_validating_a_property_has_greater_than_or_equal_to_a_scalar.cs" />
-    <Compile Include="IComparable\When_validation_a_property_as_less_than_or_equal_to_another.cs" />
-    <Compile Include="IComparable\When_validation_a_property_as_less_than_or_equal_to_a_sclar.cs" />
-    <Compile Include="Enumerables\When_validating_a_nullable_property.cs" />
-    <Compile Include="Exceptions\When_failing_to_validate_a_property.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReferenceType\When_validating_a_property_as_not_null.cs" />
-    <Compile Include="SemanticString\When_validating_a_property_as_a_valid_bs7666_post_code.cs" />
-    <Compile Include="SemanticString\When_validating_a_property_as_a_valid_email_address.cs" />
-    <Compile Include="String\When_validating_a_property_as_not_null_or_empty.cs" />
-    <Compile Include="String\When_validating_a_property_for_maximum_length.cs" />
-    <Compile Include="String\When_validating_a_property_for_minimum_length.cs" />
-    <Compile Include="TestClass.cs" />
-    <Compile Include="TestClassWrapper.cs" />
-    <Compile Include="validation_fixture.cs" />
-    <Compile Include="when_validating_against_the_a_basic_nested_property.cs" />
-    <Compile Include="when_validating_against_the_a_basic_property.cs" />
-    <Compile Include="when_validating_against_the_a_nested_parameter_rule.cs" />
-    <Compile Include="when_validating_against_the_parameter_with_no_property.cs" />
-    <Compile Include="when_validating_with_a_conditional_predicate.cs" />
-    <Compile Include="when_validating_with_a_conditional_rule.cs" />
+    <ProjectReference Include="..\MuonLab.Validation\MuonLab.Validation.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="EmailValidator\tests.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
-      <Visible>False</Visible>
-      <ProductName>Windows Installer 3.1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MuonLab.Validation\MuonLab.Validation.csproj">
-      <Project>{66ec11a2-107b-4d9a-b1cb-2c9a3db4e303}</Project>
-      <Name>MuonLab.Validation</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-      <Paket>True</Paket>
-    </Reference>
-  </ItemGroup>
+
 </Project>
