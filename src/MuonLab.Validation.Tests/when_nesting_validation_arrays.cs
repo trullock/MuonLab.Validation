@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests
 {
 	class when_nesting_validation_arrays
 	{
-		[Test]
+		[Fact]
 		public void CorrectPropertyChainGenerated()
 		{
 			var outerClass = new Language
 			{
-				TermCategories = new []
+				TermCategories = new[]
 				{
 					new Language.TermCategory
 					{
@@ -40,7 +40,7 @@ namespace MuonLab.Validation.Tests
 
 			var violations = validationReport.Violations.ToArray();
 
-			var error1 = Name(violations[0]);//ReflectionHelper.PropertyChainToString(violations[0].Property, '.');
+			var error1 = Name(violations[0]); //ReflectionHelper.PropertyChainToString(violations[0].Property, '.');
 
 			error1.ShouldEqual("TermCategories[0].Terms[1].Translated");
 		}
@@ -55,7 +55,8 @@ namespace MuonLab.Validation.Tests
 				return propertyName;
 
 			var memberExpression = expression.Body as MemberExpression;
-			if (!memberExpression.Member.ReflectedType.IsGenericType || memberExpression.Member.ReflectedType.GetGenericTypeDefinition() != typeof(Nullable<>))
+			if (!memberExpression.Member.ReflectedType.IsGenericType ||
+			    memberExpression.Member.ReflectedType.GetGenericTypeDefinition() != typeof(Nullable<>))
 				return propertyName;
 
 			return propertyName.Substring(0, propertyName.Length - 6);

@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.Exceptions
 {
@@ -15,7 +15,7 @@ namespace MuonLab.Validation.Tests.Exceptions
 			this.validator = new TestClassValidator();
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_exception_is_caught_and_reported()
 		{
 			var testClass = new TestClass();
@@ -25,7 +25,7 @@ namespace MuonLab.Validation.Tests.Exceptions
 			var errorDescriptor = validationReport.Violations.First().Error;
 			errorDescriptor.Key.ShouldEqual("ValidationError");
 		}
-		
+
 
 		private class TestClass
 		{

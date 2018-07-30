@@ -1,9 +1,8 @@
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.SemanticString
 {
-	[TestFixture]
 	public class When_validating_a_property_as_a_valid_email_address
 	{
 		private TestClassValidator validator;
@@ -14,7 +13,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			this.validator = new TestClassValidator();
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_nulls_fail_validation()
 		{
 			var testClass = new TestClass(null);
@@ -24,7 +23,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			validationReport.Violations.First().Error.Key.ShouldEqual("ValidEmail");
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_empty_string_fail_validation()
 		{
 			var testClass = new TestClass(string.Empty);
@@ -34,7 +33,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			validationReport.Violations.First().Error.Key.ShouldEqual("ValidEmail");
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_valid_email_passes_validation()
 		{
 			var testClass = new TestClass("trullock@gmail.com");
@@ -44,7 +43,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			Assert.IsTrue(validationReport.IsValid);
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_invalid_email2_fails_validation()
 		{
 			var testClass = new TestClass("trullock@gmail@com");
@@ -53,7 +52,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			validationReport.Violations.First().Error.Key.ShouldEqual("ValidEmail");
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_invalid_email3_fails_validation()
 		{
 			var testClass = new TestClass("muonlab.com");

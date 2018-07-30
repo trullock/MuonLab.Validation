@@ -1,9 +1,8 @@
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.Nullable
 {
-	[TestFixture]
 	public class When_validating_a_nullable_property_as_greaterthan
 	{
 		private TestClassValidator validator;
@@ -14,7 +13,7 @@ namespace MuonLab.Validation.Tests.Nullable
 			this.validator = new TestClassValidator();
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_0_returns_false()
 		{
 			var testClass = new TestClass(0);
@@ -26,7 +25,7 @@ namespace MuonLab.Validation.Tests.Nullable
 			violations[0].Error.Replacements["arg0"].Value.ShouldEqual("1");
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_1_returns_true()
 		{
 			var testClass = new TestClass(1);
@@ -36,7 +35,7 @@ namespace MuonLab.Validation.Tests.Nullable
 			validationReport.IsValid.ShouldBeTrue();
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_null_returns_true()
 		{
 			var testClass = new TestClass(null);

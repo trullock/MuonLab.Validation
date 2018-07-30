@@ -1,8 +1,7 @@
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.NullProperties
 {
-	[TestFixture]
 	public class when_validating_a_null_property
 	{
 		private TestClassValidator validator;
@@ -15,7 +14,7 @@ namespace MuonLab.Validation.Tests.NullProperties
 			this.report = this.validator.Validate(new TestClass());
 		}
 
-		[Test]
+		[Fact]
 		public void the_validation_report_should_be_valid()
 		{
 			report.IsValid.ShouldBeTrue();

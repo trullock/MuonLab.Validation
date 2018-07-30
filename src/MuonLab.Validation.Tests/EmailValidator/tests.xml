@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!DOCTYPE tests>
 <!--
 If you update these tests, don't forget to change the actual version number
@@ -974,7 +975,7 @@ Version	Date		Notes
 	<test>
 		<valid>false</valid>
 		<warning>false</warning>
-		<address>[test]@iana.org</address>
+		<address>[Fact]@iana.org</address>
 		<comment>Square brackets only allowed within quotes</comment>
 		<source>Dave Child</source>
 		<sourcelink>http://code.google.com/p/php-email-address-validation/</sourcelink>
@@ -1445,7 +1446,7 @@ Version	Date		Notes
 		<sourcelink>http://www.linuxjournal.com/article/9585</sourcelink>
 		<id>161</id>
 	</test>
-	
+
 	<test>
 		<address>"foo"(yay)@(hoopla)[1.2.3.4]</address>
 		<valid>false</valid>
@@ -1518,7 +1519,7 @@ Version	Date		Notes
 		<sourcelink>http://www.dominicsayers.com/isemail</sourcelink>
 		<id>171</id>
 	</test>
-	
+
 	<test>
 		<address>first(12345678901234567890123456789012345678901234567890)last@(1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890)iana.org</address>
 		<valid>false</valid>
@@ -1601,7 +1602,7 @@ Version	Date		Notes
 		<sourcelink>http://www.dominicsayers.com/isemail</sourcelink>
 		<id>181</id>
 	</test>
-	
+
 	<test>
 		<address>first(abc("def".ghi).mno)middle(abc("def".ghi).mno).last@(abc("def".ghi).mno)example(abc("def".ghi).mno).(abc("def".ghi).mno)com(abc("def".ghi).mno)</address>
 		<valid>false</valid>
@@ -1926,7 +1927,7 @@ Version	Date		Notes
 		<sourcelink>http://www.dominicsayers.com/isemail</sourcelink>
 		<id>221</id>
 	</test>
-	
+
 	<test>
 		<address>first.last @iana.org</address>
 		<valid>true</valid>
@@ -1954,7 +1955,7 @@ Version	Date		Notes
 		<sourcelink>http://porg.es/blog/properly-validating-e-mail-addresses</sourcelink>
 		<id>225</id>
 	</test>
-	
+
 	<test>
 		<address>cdburgess+!#$%&amp;'*-/=?+_{}|~test@gmail.com</address>
 		<valid>true</valid>
@@ -2426,8 +2427,8 @@ Version	Date		Notes
 	<glossary id="length">
 		<title>Length Tests</title>
 		<desc>
-There are several length limits that are imposed.
-The entire address cannot be longer than 254 characters, as explained by errata 45633245864
+			There are several length limits that are imposed.
+			The entire address cannot be longer than 254 characters, as explained by errata 45633245864
 		</desc>
 	</glossary>
 	<glossary id="length2">

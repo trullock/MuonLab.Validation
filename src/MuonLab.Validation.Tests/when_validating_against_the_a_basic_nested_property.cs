@@ -1,10 +1,9 @@
 using System;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests
 {
-	[TestFixture]
-	public class when_validating_against_the_a_basic_nested_property 
+	public class when_validating_against_the_a_basic_nested_property
 	{
 		private TestClassWrapperValidator validator;
 		private ValidationReport report;
@@ -16,7 +15,7 @@ namespace MuonLab.Validation.Tests
 			this.report = this.validator.Validate(new TestClassWrapper());
 		}
 
-		[Test]
+		[Fact]
 		public void the_validation_report_should_be_valid()
 		{
 			report.IsValid.ShouldBeTrue();

@@ -2,20 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests
 {
 	class when_nesting_validation
 	{
-		[Test]
+		[Fact]
 		public void CorrectPropertyChainGenerated()
 		{
-			var outerClass = new OuterClass { InnerClass = new InnerClass { InnerInnerClass = new InnerInnerClass{ InnerInnerInnerClass = new InnerInnerInnerClass
+			var outerClass = new OuterClass
 			{
-				Property = "Hello"
-			
-			} } } };
+				InnerClass = new InnerClass
+				{
+					InnerInnerClass = new InnerInnerClass
+					{
+						InnerInnerInnerClass = new InnerInnerInnerClass
+						{
+							Property = "Hello"
+						}
+					}
+				}
+			};
 
 			var validator = new OuterClassValidator();
 

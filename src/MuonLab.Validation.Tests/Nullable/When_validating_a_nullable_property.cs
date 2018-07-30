@@ -1,9 +1,8 @@
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.Nullable
 {
-	[TestFixture]
 	public class When_validating_a_nullable_property
 	{
 		private TestClassValidator validator;
@@ -14,7 +13,7 @@ namespace MuonLab.Validation.Tests.Nullable
 			this.validator = new TestClassValidator();
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_false_returns_false()
 		{
 			var testClass = new TestClass(false);
@@ -24,7 +23,7 @@ namespace MuonLab.Validation.Tests.Nullable
 			validationReport.Violations.First().Error.Key.ShouldEqual("BeTrue");
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_true_returns_true()
 		{
 			var testClass = new TestClass(true);
@@ -34,7 +33,7 @@ namespace MuonLab.Validation.Tests.Nullable
 			validationReport.IsValid.ShouldBeTrue();
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_null_returns_true()
 		{
 			var testClass = new TestClass(null);

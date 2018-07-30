@@ -1,9 +1,8 @@
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.String
 {
-	[TestFixture]
 	public class When_validating_a_property_for_minimum_length
 	{
 		private TestClassValidator validator;
@@ -14,7 +13,7 @@ namespace MuonLab.Validation.Tests.String
 			this.validator = new TestClassValidator();
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_nulls_fail_validation()
 		{
 			var testClass = new TestClass(null);
@@ -25,7 +24,7 @@ namespace MuonLab.Validation.Tests.String
 			validationReport.Violations.First().Error.Replacements["arg0"].Value.ShouldEqual("5");
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_strings_that_are_too_short_fail_validation()
 		{
 			var testClass = new TestClass("1234");
@@ -36,7 +35,7 @@ namespace MuonLab.Validation.Tests.String
 			validationReport.Violations.First().Error.Replacements["arg0"].Value.ShouldEqual("5");
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_strings_that_are_the_minimum_length_pass_validation()
 		{
 			var testClass = new TestClass("12345");
@@ -46,7 +45,7 @@ namespace MuonLab.Validation.Tests.String
 			Assert.IsTrue(validationReport.IsValid);
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_strings_that_are_longer_than_the_minimum_length_pass_validation()
 		{
 			var testClass = new TestClass("123456");

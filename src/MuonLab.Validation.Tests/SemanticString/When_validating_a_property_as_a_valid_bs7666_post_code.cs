@@ -1,9 +1,8 @@
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.SemanticString
 {
-	[TestFixture]
 	public class When_validating_a_property_as_a_valid_bs7666_post_code
 	{
 		private TestClassValidator validator;
@@ -14,7 +13,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			this.validator = new TestClassValidator();
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_nulls_fail_validation()
 		{
 			var testClass = new TestClass(null);
@@ -24,7 +23,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			validationReport.Violations.First().Error.Key.ShouldEqual("ValidPostcode");
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_empty_string_fail_validation()
 		{
 			var testClass = new TestClass(string.Empty);
@@ -34,7 +33,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			validationReport.Violations.First().Error.Key.ShouldEqual("ValidPostcode");
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_ANNAA_passes_validation()
 		{
 			var testClass = new TestClass("M1 1AA");
@@ -44,7 +43,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			Assert.IsTrue(validationReport.IsValid);
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_ANNNAA_passes_validation()
 		{
 			var testClass = new TestClass("M60 1NW");
@@ -54,7 +53,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			Assert.IsTrue(validationReport.IsValid);
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_AANNAA_passes_validation()
 		{
 			var testClass = new TestClass("CR2 6XH");
@@ -64,7 +63,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			Assert.IsTrue(validationReport.IsValid);
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_AANNNAA_passes_validation()
 		{
 			var testClass = new TestClass("DN55 1PT");
@@ -74,7 +73,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			Assert.IsTrue(validationReport.IsValid);
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_ANANAA_passes_validation()
 		{
 			var testClass = new TestClass("W1A 1HQ");
@@ -84,7 +83,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			Assert.IsTrue(validationReport.IsValid);
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_AANANAA_passes_validation()
 		{
 			var testClass = new TestClass("EC1A 1BB");
@@ -94,7 +93,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			Assert.IsTrue(validationReport.IsValid);
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_GIR0AA_passes_validation()
 		{
 			var testClass = new TestClass("GIR 0AA");

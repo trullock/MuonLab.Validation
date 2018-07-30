@@ -1,9 +1,8 @@
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.IComparable
 {
-	[TestFixture]
 	public class when_validating_a_property_as_greater_than_a_scalar
 	{
 		TestClassValidator validator;
@@ -14,7 +13,7 @@ namespace MuonLab.Validation.Tests.IComparable
 			this.validator = new TestClassValidator();
 		}
 
-		[Test]
+		[Fact]
 		public void test_1_greater_than_4_returns_false()
 		{
 			var testClass = new TestClass(1);
@@ -25,7 +24,7 @@ namespace MuonLab.Validation.Tests.IComparable
 			validationReport.Violations.First().Error.Replacements["arg0"].Value.ShouldEqual("4");
 		}
 
-		[Test]
+		[Fact]
 		public void test_8_greater_than_4_returns_true()
 		{
 			var testClass = new TestClass(8);
@@ -35,7 +34,7 @@ namespace MuonLab.Validation.Tests.IComparable
 			Assert.IsTrue(validationReport.IsValid);
 		}
 
-		[Test]
+		[Fact]
 		public void test_4_greater_than_4_returns_false()
 		{
 			var testClass = new TestClass(4);
@@ -49,13 +48,15 @@ namespace MuonLab.Validation.Tests.IComparable
 		private class TestClass
 		{
 			public int value { get; set; }
+
 			public TestClass(int value)
 			{
 				this.value = value;
 			}
 		}
 
-		private class TestClassValidator : Validator<TestClass> {
+		private class TestClassValidator : Validator<TestClass>
+		{
 			protected override void Rules()
 			{
 				Ensure(x => x.value.IsGreaterThan(4));

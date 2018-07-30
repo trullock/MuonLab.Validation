@@ -1,8 +1,7 @@
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests
 {
-	[TestFixture]
 	public class when_conditionally_validating_against_the_parameter_with_no_property
 	{
 		private TestValidator validator;
@@ -15,7 +14,7 @@ namespace MuonLab.Validation.Tests
 			this.report = this.validator.Validate(new TestClass());
 		}
 
-		[Test]
+		[Fact]
 		public void the_validation_report_should_be_invalid()
 		{
 			report.IsValid.ShouldBeFalse();
@@ -25,7 +24,7 @@ namespace MuonLab.Validation.Tests
 		{
 			protected override void Rules()
 			{
-				When(x => x.Satisfies(p => true, ""), () => 
+				When(x => x.Satisfies(p => true, ""), () =>
 					Ensure(x => x.Name.IsNotNullOrEmpty()));
 			}
 		}

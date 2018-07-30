@@ -1,9 +1,8 @@
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.String
 {
-	[TestFixture]
 	public class When_validating_a_property_as_not_null_or_empty
 	{
 		private TestClassValidator validator;
@@ -14,7 +13,7 @@ namespace MuonLab.Validation.Tests.String
 			this.validator = new TestClassValidator();
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_nulls_fail_validation()
 		{
 			var testClass = new TestClass(null);
@@ -23,7 +22,7 @@ namespace MuonLab.Validation.Tests.String
 			validationReport.Violations.First().Error.Key.ShouldEqual("Required");
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_empty_string_fail_validation()
 		{
 			var testClass = new TestClass(string.Empty);
@@ -33,7 +32,7 @@ namespace MuonLab.Validation.Tests.String
 			validationReport.Violations.First().Error.Key.ShouldEqual("Required");
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_not_null_or_empty_passes_validation()
 		{
 			var testClass = new TestClass("a");

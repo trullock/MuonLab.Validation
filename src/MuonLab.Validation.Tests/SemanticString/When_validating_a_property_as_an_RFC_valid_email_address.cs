@@ -1,10 +1,9 @@
 using System;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.SemanticString
 {
-	[TestFixture]
 	public class When_validating_a_property_as_an_RFC_valid_email_address
 	{
 		private TestClassValidator validator;
@@ -16,7 +15,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 		}
 
 
-		[Test]
+		[Fact]
 		[TestCase(@"NotAnEmail", false)]
 		[TestCase(@"@NotAnEmail", false)]
 		[TestCase(@"""test\\blah""@example.com", true)]

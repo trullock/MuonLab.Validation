@@ -1,9 +1,8 @@
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.IComparable
 {
-	[TestFixture]
 	public class When_validating_a_property_as_equal_to_a_scalar
 	{
 		TestClassValidator validator;
@@ -14,18 +13,18 @@ namespace MuonLab.Validation.Tests.IComparable
 			this.validator = new TestClassValidator();
 		}
 
-		[Test]
+		[Fact]
 		public void test_1_equals_4_returns_false()
 		{
 			var testClass = new TestClass(1);
 
 			var validationReport = this.validator.Validate(testClass);
-			
+
 			validationReport.Violations.First().Error.Key.ShouldEqual("EqualTo");
 			validationReport.Violations.First().Error.Replacements["arg0"].Value.ShouldEqual("4");
 		}
 
-		[Test]
+		[Fact]
 		public void test_8_equals_4_returns_false()
 		{
 			var testClass = new TestClass(8);
@@ -35,7 +34,7 @@ namespace MuonLab.Validation.Tests.IComparable
 			Assert.IsFalse(validationReport.IsValid);
 		}
 
-		[Test]
+		[Fact]
 		public void test_4_equals_4_returns_true()
 		{
 			var testClass = new TestClass(4);

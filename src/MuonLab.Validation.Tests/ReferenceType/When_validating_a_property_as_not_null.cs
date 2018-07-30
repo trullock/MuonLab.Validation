@@ -1,9 +1,8 @@
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.ReferenceType
 {
-	[TestFixture]
 	public class When_validating_a_property_as_not_null
 	{
 		private TestClassValidator validator;
@@ -14,7 +13,7 @@ namespace MuonLab.Validation.Tests.ReferenceType
 			this.validator = new TestClassValidator();
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_not_null_returns_true()
 		{
 			var testClass = new TestClass(new object());
@@ -24,7 +23,7 @@ namespace MuonLab.Validation.Tests.ReferenceType
 			Assert.IsTrue(validationReport.IsValid);
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_not_null_returns_false()
 		{
 			var testClass = new TestClass(null);

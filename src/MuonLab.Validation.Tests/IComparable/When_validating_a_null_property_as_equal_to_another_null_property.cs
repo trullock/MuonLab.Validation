@@ -1,9 +1,8 @@
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.IComparable
 {
-	[TestFixture]
 	public class When_validating_a_null_property_as_equal_to_another_null_property
 	{
 		private TestClassValidator validator;
@@ -14,7 +13,7 @@ namespace MuonLab.Validation.Tests.IComparable
 			this.validator = new TestClassValidator();
 		}
 
-		[Test]
+		[Fact]
 		public void should_be_valid()
 		{
 			var testClass = new TestClass();
@@ -29,7 +28,6 @@ namespace MuonLab.Validation.Tests.IComparable
 		{
 			public string Value { get; set; }
 			public string Value2 { get; set; }
-
 		}
 
 		private class TestClassValidator : Validator<TestClass>

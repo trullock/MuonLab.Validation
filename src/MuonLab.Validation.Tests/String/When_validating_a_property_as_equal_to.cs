@@ -1,10 +1,9 @@
 using System;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.String
 {
-	[TestFixture]
 	public class When_validating_a_property_as_equal_to
 	{
 		private TestClassValidator validator;
@@ -15,7 +14,7 @@ namespace MuonLab.Validation.Tests.String
 			this.validator = new TestClassValidator();
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_mismatch_fail_validation()
 		{
 			var testClass = new TestClass("different");
@@ -26,7 +25,7 @@ namespace MuonLab.Validation.Tests.String
 		}
 
 
-		[Test]
+		[Fact]
 		public void ensure_match_passes_validation()
 		{
 			var testClass = new TestClass("HeLlO");

@@ -1,9 +1,8 @@
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.IComparable
 {
-	[TestFixture]
 	public class When_validating_a_property_as_equal_to_another
 	{
 		private TestClassValidator validator;
@@ -14,7 +13,7 @@ namespace MuonLab.Validation.Tests.IComparable
 			this.validator = new TestClassValidator();
 		}
 
-		[Test]
+		[Fact]
 		public void test_1_equals_4_returns_false()
 		{
 			var testClass = new TestClass(1, 4);
@@ -25,7 +24,7 @@ namespace MuonLab.Validation.Tests.IComparable
 			validationReport.Violations.First().Error.Replacements["arg0"].Value.ToString().ShouldEqual("x.Value2");
 		}
 
-		[Test]
+		[Fact]
 		public void test_4_equals_1_returns_false()
 		{
 			var testClass = new TestClass(4, 1);
@@ -38,7 +37,7 @@ namespace MuonLab.Validation.Tests.IComparable
 			validationReport.Violations.First().Error.Replacements["arg0"].Value.ToString().ShouldEqual("x.Value2");
 		}
 
-		[Test]
+		[Fact]
 		public void test_2_equals_2_returns_true()
 		{
 			var testClass = new TestClass(2, 2);

@@ -1,9 +1,8 @@
 using System.Collections;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.Enumerables
 {
-	[TestFixture]
 	public class when_validating_an_enumerable_contains_elements
 	{
 		private TestClassValidator validator;
@@ -14,7 +13,7 @@ namespace MuonLab.Validation.Tests.Enumerables
 			this.validator = new TestClassValidator();
 		}
 
-		[Test]
+		[Fact]
 		public void an_empty_list_should_be_false()
 		{
 			var testClass = new TestClass();
@@ -25,13 +24,13 @@ namespace MuonLab.Validation.Tests.Enumerables
 		}
 
 
-		[Test]
+		[Fact]
 		public void an_non_empty_list_should_be_true()
 		{
 			var testClass = new TestClass
-			                	{
-			                		List = new[] { "an item" }
-			                	};
+			{
+				List = new[] {"an item"}
+			};
 
 			var report = this.validator.Validate(testClass);
 

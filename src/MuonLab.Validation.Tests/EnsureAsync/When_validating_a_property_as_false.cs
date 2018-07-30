@@ -1,10 +1,9 @@
 using System.Linq;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.EnsureAsync
 {
-	[TestFixture]
 	public class When_validating_a_property_as_false
 	{
 		private TestClassValidator validator;
@@ -15,7 +14,7 @@ namespace MuonLab.Validation.Tests.EnsureAsync
 			this.validator = new TestClassValidator();
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_false_returns_true()
 		{
 			var testClass = new TestClass(false);
@@ -25,7 +24,7 @@ namespace MuonLab.Validation.Tests.EnsureAsync
 			Assert.IsTrue(validationReport.IsValid);
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_true_returns_false()
 		{
 			var testClass = new TestClass(true);
@@ -52,10 +51,10 @@ namespace MuonLab.Validation.Tests.EnsureAsync
 				Ensure(x => x.value.Satisfies(v => AsyncFalseCheck(v), "BeFalse"));
 			}
 
-            async Task<bool> AsyncFalseCheck(bool b)
-            {
-                return b == false;
-            }
+			async Task<bool> AsyncFalseCheck(bool b)
+			{
+				return b == false;
+			}
 		}
 	}
 }

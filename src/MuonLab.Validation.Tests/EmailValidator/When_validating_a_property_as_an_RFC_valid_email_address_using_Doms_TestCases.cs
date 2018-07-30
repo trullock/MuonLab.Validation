@@ -1,10 +1,9 @@
 using System.Text;
 using System.Xml;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.EmailValidator
 {
-	[TestFixture]
 	public class When_validating_an_email_address
 	{
 		private XmlElement tests;
@@ -12,17 +11,17 @@ namespace MuonLab.Validation.Tests.EmailValidator
 		[SetUp]
 		public void SetUp()
 		{
-
-			var manifestResourceStream = this.GetType().Assembly.GetManifestResourceStream("MuonLab.Validation.Tests.EmailValidator.tests.xml");
+			var manifestResourceStream = this.GetType().Assembly
+				.GetManifestResourceStream("MuonLab.Validation.Tests.EmailValidator.tests.xml");
 			var xmlDocument = new XmlDocument();
 			xmlDocument.Load(manifestResourceStream);
 			this.tests = xmlDocument.DocumentElement;
 		}
 
-		[Test]
+		[Fact]
 		public void ensure_common_things_work()
 		{
-			foreach(XmlElement test in tests.SelectNodes("test"))
+			foreach (XmlElement test in tests.SelectNodes("test"))
 			{
 				var address = test.SelectSingleNode("address").InnerText;
 				// replace nulls in xml
@@ -33,6 +32,5 @@ namespace MuonLab.Validation.Tests.EmailValidator
 				Assert.AreEqual(result, new Validation.EmailValidator().IsEmailValid(address), address);
 			}
 		}
-
 	}
 }

@@ -1,9 +1,8 @@
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests
 {
-	[TestFixture]
 	public class ErrorMessagesShouldWork
 	{
 		TestValidator validator;
@@ -13,10 +12,10 @@ namespace MuonLab.Validation.Tests
 		public void SetUp()
 		{
 			this.validator = new TestValidator();
-			this.report = this.validator.Validate(new TestClass { Age = 12 });
+			this.report = this.validator.Validate(new TestClass {Age = 12});
 		}
 
-		[Test]
+		[Fact]
 		public void the_validation_report_should_be_valid()
 		{
 			report.Violations.First().Error.Key.ShouldEqual("Key");

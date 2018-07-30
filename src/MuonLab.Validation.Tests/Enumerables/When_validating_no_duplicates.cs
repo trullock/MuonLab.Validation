@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MuonLab.Validation.Tests.Enumerables
 {
 	public class When_validating_no_duplicates
 	{
-		[Test]
+		[Fact]
 		public void DuplicateRecordsShouldFail()
 		{
 			var testClass = new TestClass
 			{
-				List = new[] { new InnerClass { DupeVal = "hello" }, new InnerClass { DupeVal = "hello" }, new InnerClass() }
+				List = new[] {new InnerClass {DupeVal = "hello"}, new InnerClass {DupeVal = "hello"}, new InnerClass()}
 			};
 
 			var testClassValidator = new TestClassValidator();
@@ -34,24 +34,30 @@ namespace MuonLab.Validation.Tests.Enumerables
 			error2.ShouldEqual("List[1].DupeVal");
 		}
 
-		[Test]
+		[Fact]
 		public void PropertyChainShouldContainPrefixes()
 		{
 			var testContainer = new OuterTestClass
 			{
-				TestClasses = new []
+				TestClasses = new[]
 				{
 					new TestClass
 					{
-						List = new[] {new InnerClass {DupeVal = "hello"}, new InnerClass {DupeVal = "hello"}, new InnerClass()}
+						List = new[]
+							{new InnerClass {DupeVal = "hello"}, new InnerClass {DupeVal = "hello"}, new InnerClass()}
 					},
 					new TestClass
 					{
-						List = new[] {new InnerClass {DupeVal = "hello1"}, new InnerClass {DupeVal = "hello2"}, new InnerClass()}
+						List = new[]
+							{new InnerClass {DupeVal = "hello1"}, new InnerClass {DupeVal = "hello2"}, new InnerClass()}
 					},
 					new TestClass
 					{
-						List = new[] {new InnerClass {DupeVal = "hello"}, new InnerClass {DupeVal = "hello"}, new InnerClass {DupeVal = "hello"}}
+						List = new[]
+						{
+							new InnerClass {DupeVal = "hello"}, new InnerClass {DupeVal = "hello"},
+							new InnerClass {DupeVal = "hello"}
+						}
 					}
 				}
 			};
@@ -75,18 +81,22 @@ namespace MuonLab.Validation.Tests.Enumerables
 			error3.ShouldEqual("TestClasses[2].List[1].DupeVal");
 		}
 
-		[Test]
+		[Fact]
 		public void NonDuplicateRecordsShouldPass()
 		{
 			var testClass = new TestClass
 			{
-				List = new[] { new InnerClass { DupeVal = "hello0" }, new InnerClass { DupeVal = "hello1" }, new InnerClass { DupeVal = "hello2" } }
+				List = new[]
+				{
+					new InnerClass {DupeVal = "hello0"}, new InnerClass {DupeVal = "hello1"},
+					new InnerClass {DupeVal = "hello2"}
+				}
 			};
 
 			var testClassValidator = new TestClassValidator();
 
 			var validationReport = testClassValidator.Validate(testClass);
-			
+
 			validationReport.IsValid.ShouldBeTrue();
 		}
 
