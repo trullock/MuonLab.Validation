@@ -27,7 +27,7 @@ namespace MuonLab.Validation
 		public static ICondition<IEnumerable<TValue>> HasCountGreaterThan<TValue>(this IEnumerable<TValue> self,
 			Func<TValue, bool> predicate, int count)
 		{
-			return self.HasCountGreaterThan(predicate, count, "GreaterThan");
+			return self.HasCountGreaterThan(predicate, count, "GreaterThanCount");
 		}
 
 		public static ICondition<IEnumerable<TValue>> HasCountGreaterThan<TValue>(this IEnumerable<TValue> self,
@@ -45,7 +45,7 @@ namespace MuonLab.Validation
 		public static ICondition<IEnumerable<TValue>> HasCountGreaterThanOrEqualTo<TValue>(
 			this IEnumerable<TValue> self, Func<TValue, bool> predicate, int count)
 		{
-			return self.HasCountGreaterThanOrEqualTo(predicate, count, "GreaterThanEq");
+			return self.HasCountGreaterThanOrEqualTo(predicate, count, "GreaterThanEqCount");
 		}
 
 		public static ICondition<IEnumerable<TValue>> HasCountGreaterThanOrEqualTo<TValue>(
@@ -62,7 +62,7 @@ namespace MuonLab.Validation
 		public static ICondition<IEnumerable<TValue>> HasCountLessThan<TValue>(this IEnumerable<TValue> self,
 			Func<TValue, bool> predicate, int count)
 		{
-			return self.HasCountLessThan(predicate, count, "LessThan");
+			return self.HasCountLessThan(predicate, count, "LessThanCount");
 		}
 
 		public static ICondition<IEnumerable<TValue>> HasCountLessThan<TValue>(this IEnumerable<TValue> self,
@@ -80,7 +80,7 @@ namespace MuonLab.Validation
 		public static ICondition<IEnumerable<TValue>> HasCountLessThanOrEqualTo<TValue>(this IEnumerable<TValue> self,
 			Func<TValue, bool> predicate, int count)
 		{
-			return self.HasCountLessThanOrEqualTo(predicate, count, "LessThanEq");
+			return self.HasCountLessThanOrEqualTo(predicate, count, "LessThanEqCount");
 		}
 
 		public static ICondition<IEnumerable<TValue>> HasCountLessThanOrEqualTo<TValue>(this IEnumerable<TValue> self,
