@@ -74,6 +74,12 @@ namespace MuonLab.Validation
 			return foundRules;
 		}
 
+		/// <summary>
+		/// Creates a rule that ensures the given property meets the given criteria
+		/// </summary>
+		/// <typeparam name="TValue"></typeparam>
+		/// <param name="propertyCondition"></param>
+		/// <returns></returns>
 		protected ConditionalChain<TValue> Ensure<TValue>(Expression<Func<T, ICondition<TValue>>> propertyCondition)
 		{
 			var methodCallExpression = propertyCondition.Body as MethodCallExpression;
@@ -84,6 +90,12 @@ namespace MuonLab.Validation
 			return new ConditionalChain<TValue>(this, propertyCondition);
 		}
 
+		/// <summary>
+		/// Ensure the given property
+		/// </summary>
+		/// <typeparam name="TValue"></typeparam>
+		/// <param name="propertyCondition"></param>
+		/// <returns></returns>
 		protected ConditionalChain<TValue> Ensure<TValue>(Expression<Func<T, ICondition<IList<TValue>>>> propertyCondition)
 		{
 			var methodCallExpression = propertyCondition.Body as MethodCallExpression;
@@ -135,6 +147,12 @@ namespace MuonLab.Validation
 			throw new NotSupportedException();
 		}
 
+		/// <summary>
+		/// Creates a conditional validation clause. When the condition is met, the rules will be evaluated
+		/// </summary>
+		/// <typeparam name="TValue"></typeparam>
+		/// <param name="whenCondition">The condition to evaluate to determine if to apply the rules</param>
+		/// <param name="rules">The rules to apply when the condition is met</param>
 		protected void When<TValue>(Expression<Func<T, ICondition<TValue>>> whenCondition, Action rules)
 		{
 			var otherRules = this.vRules;
@@ -150,6 +168,11 @@ namespace MuonLab.Validation
 			this.vRules.Add(new ConditionalValidationRule<T, TValue>(whenCondition, conditionalRules));
 		}
 
+		/// <summary>
+		/// Creates a conditional validation clause. When the condition is met, the rules will be evaluated
+		/// </summary>
+		/// <param name="whenCondition">The condition to evaluate to determine if the apply the rules</param>
+		/// <param name="rules">The rules to apply when the condition is met</param>
 		protected void When(Func<bool> whenCondition, Action rules)
 		{
 			var otherRules = this.vRules;
@@ -165,6 +188,10 @@ namespace MuonLab.Validation
 			this.vRules.Add(new ConditionalPredicateValidationRule<T>(whenCondition, conditionalRules));
 		}
 
+		/// <summary>
+		/// Creates a logical OR validation clause, which requires only one of the rules tio be true for the clause to be considered valid
+		/// </summary>
+		/// <param name="rules">A collection of rules of which only one need pass</param>
 		protected void Any(Action rules)
 		{
 			var otherRules = this.vRules;
