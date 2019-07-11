@@ -114,7 +114,7 @@ namespace MuonLab.Validation
 				this.vRules.Add(new ChildValidationRule<T, TValue>(propertyCondition));
 				return;
 			}
-
+			
 			if (methodCallExpression.Arguments[0] is MemberExpression)
 			{
 				this.vRules.Add(new PropertyValidationRule<T, TValue>(propertyCondition));
@@ -135,6 +135,12 @@ namespace MuonLab.Validation
 			if (genericTypeDefinition == typeof (ChildListValidationCondition<>))
 			{
 				this.vRules.Add(new ChildListValidationRule<T, TValue>(propertyCondition));
+				return;
+			}
+
+			if (genericTypeDefinition == typeof (ChildListPredicateCondition<>))
+			{
+				this.vRules.Add(new ChildListPredicateValidationRule<T, TValue>(propertyCondition));
 				return;
 			}
 

@@ -26,5 +26,10 @@ namespace MuonLab.Validation
 		{
 			return new ChildListValidationCondition<TValue>(validator);
 		}
+
+		public static ChildListPredicateCondition<TValue> AllSatisfy<TValue>(this IList<TValue> self, Func<TValue, bool> predicate, string errorKey)
+		{
+			return new ChildListPredicateCondition<TValue>(predicate, errorKey);
+		}
 	}
 }
