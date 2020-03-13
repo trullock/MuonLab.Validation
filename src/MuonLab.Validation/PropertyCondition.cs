@@ -16,5 +16,14 @@ namespace MuonLab.Validation
 			this.Condition = condition;
 			this.ErrorKey = errorKey;
 		}
+		public PropertyCondition(Func<TValue, ConditionResult> condition)
+		{
+			this.Condition = v =>
+			{
+				var result = condition(v);
+				this.ErrorKey = result.ErrorKey;
+				return result.Valid;
+			};
+		}
 	}
 }
