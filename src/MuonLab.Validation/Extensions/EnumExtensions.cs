@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace MuonLab.Validation.Tests.Enums
+namespace MuonLab.Validation.Extensions
 {
 	public static class EnumExtensions
 	{
