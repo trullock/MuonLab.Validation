@@ -9,6 +9,7 @@
     <Product>MuonLab.Validation</Product>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Fluent Validation Library</Description>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
 </Project>
