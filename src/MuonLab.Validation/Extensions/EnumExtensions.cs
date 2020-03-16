@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
 
-namespace MuonLab.Validation.Extensions
+// ReSharper disable once CheckNamespace
+namespace MuonLab.Validation
 {
 	public static class EnumExtensions
 	{
