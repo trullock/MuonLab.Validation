@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace MuonLab.Validation
 {
-	internal sealed class ChildListValidationRule<T, TValue> : IValidationRule<T>
+	sealed class ChildListValidationRule<T, TValue> : IValidationRule<T>
 	{
 		protected MemberExpression property;
 		protected readonly Expression<Func<T, ICondition<IList<TValue>>>> validationExpression;
@@ -41,9 +41,17 @@ namespace MuonLab.Validation
 			// get the property value to be validated
 			var value = this.PropertyExpression.Compile().Invoke(entity);
 
-			// get validator from satisfies argumetn
+			// get validator from satisfies argument
 			var lambda = Expression.Lambda(this.Condition.Arguments[1], this.validationExpression.Parameters[0]);
 			var validator = lambda.Compile().DynamicInvoke(entity) as IValidator<TValue>;
+
+			// get ignoreDefaultValues from satisfies argument
+			var ignoreDefaultValues = false;
+			if (this.Condition.Arguments.Count == 3)
+			{
+				lambda = Expression.Lambda(this.Condition.Arguments[2], this.validationExpression.Parameters[0]);
+				ignoreDefaultValues = (bool) lambda.Compile().DynamicInvoke(entity);
+			}
 
 			var list = value as IList;
 
@@ -54,6 +62,9 @@ namespace MuonLab.Validation
 				var j = i;
 
 				ValidationReport report;
+
+				if (EqualityComparer<TValue>.Default.Equals(value[i], default) && ignoreDefaultValues)
+					continue;
 
 				if (prefix != null)
 				{

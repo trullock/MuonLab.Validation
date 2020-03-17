@@ -31,9 +31,31 @@ namespace MuonLab.Validation
 			return new ChildValidationCondition<TValue>(validator);
 		}
 
+		/// <summary>
+		/// Ensures all the values satisfy the given validator
+		/// </summary>
+		/// <typeparam name="TValue"></typeparam>
+		/// <param name="self"></param>
+		/// <param name="validator"></param>
+		/// <param name="ignoreDefaultValues"></param>
+		/// <returns></returns>
 		public static ChildListValidationCondition<TValue> AllSatisfy<TValue>(this IList<TValue> self, IValidator<TValue> validator)
 		{
-			return new ChildListValidationCondition<TValue>(validator);
+			return new ChildListValidationCondition<TValue>(validator, false);
+		}
+
+		/// <summary>
+		/// Ensures all* the values satisfy the given validator
+		/// * If ignoreDefaultValues is true, then any value which is the default of its type will be ignored. Useful for ignoring nulls in partially populated ILists
+		/// </summary>
+		/// <typeparam name="TValue"></typeparam>
+		/// <param name="self"></param>
+		/// <param name="validator"></param>
+		/// <param name="ignoreDefaultValues"></param>
+		/// <returns></returns>
+		public static ChildListValidationCondition<TValue> AllSatisfy<TValue>(this IList<TValue> self, IValidator<TValue> validator, bool ignoreDefaultValues)
+		{
+			return new ChildListValidationCondition<TValue>(validator, ignoreDefaultValues);
 		}
 	}
 }

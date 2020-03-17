@@ -1,5 +1,4 @@
 using System.Linq;
-using MuonLab.Validation.Extensions;
 using Xunit;
 
 namespace MuonLab.Validation.Tests.Enums
