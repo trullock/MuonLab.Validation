@@ -11,7 +11,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			var validator = new TestClassValidator();
 			var testClass = new TestClass(null);
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("ValidEmail");
 		}
@@ -22,7 +22,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			var validator = new TestClassValidator();
 			var testClass = new TestClass(string.Empty);
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("ValidEmail");
 		}
@@ -33,7 +33,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 			var validator = new TestClassValidator();
 			var testClass = new TestClass("trullock@gmail.com");
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.IsValid.ShouldBeTrue();
 		}
@@ -43,7 +43,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 		{
 			var validator = new TestClassValidator();
 			var testClass = new TestClass("trullock@gmail@com");
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("ValidEmail");
 		}
@@ -53,7 +53,7 @@ namespace MuonLab.Validation.Tests.SemanticString
 		{
 			var validator = new TestClassValidator();
 			var testClass = new TestClass("muonlab.com");
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("ValidEmail");
 		}

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 // ReSharper disable once CheckNamespace
 namespace MuonLab.Validation
@@ -33,41 +34,41 @@ namespace MuonLab.Validation
 							if (s.Length < minimumLength)
 							{
 								this.ErrorKey = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
-								return false;
+								return Task.FromResult(false);
 							}
 
 							// check case variation
 							if (requireCaseVariation && !ValidateRegex(s, @"(?=.*[a-z])(?=.*[A-Z])"))
 							{
 								this.ErrorKey = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
-								return false;
+                                return Task.FromResult(false);
 							}
 							else if (!requireCaseVariation && !ValidateRegex(s, @"(?=.*[a-zA-Z])"))
 							{
 								this.ErrorKey = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
-								return false;
+                                return Task.FromResult(false);
 							}
 
 							// check numerics
 							if (requireNumeric && !ValidateRegex(s, @"(?=.*[0-9])"))
 							{
 								this.ErrorKey = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
-								return false;
+                                return Task.FromResult(false);
 							}
 
 							// check presence of non alphanumeric
 							if (requireNonAlphanumeric && !ValidateRegex(s, @"(?=.*[^0-9a-zA-Z])"))
 							{
 								this.ErrorKey = GetErrorMessage(minimumLength, requireCaseVariation, requireNumeric, requireNonAlphanumeric);
-								return false;
+                                return Task.FromResult(false);
 							}
 						}
 
-						return true;
+                        return Task.FromResult(true);
 					};
 			}
 
-			// TODO: globalize
+			// TODO: localise
 			static string GetErrorMessage(int minimumLength, bool requireCaseVariation, bool requireNumeric, bool requireNonAlphanumeric)
 			{
 				IList<string> errors = new List<string>();

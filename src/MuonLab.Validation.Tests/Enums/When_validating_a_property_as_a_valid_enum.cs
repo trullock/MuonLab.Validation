@@ -11,7 +11,7 @@ namespace MuonLab.Validation.Tests.Enums
 			var validator = new TestClassValidator();
 			var testClass = new TestClass(TestClass.MyEnum.One);
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.IsValid.ShouldBeTrue();
 		}
@@ -22,7 +22,7 @@ namespace MuonLab.Validation.Tests.Enums
 			var validator = new TestClassValidator();
 			var testClass = new TestClass((TestClass.MyEnum)5);
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("Invalid");
 		}

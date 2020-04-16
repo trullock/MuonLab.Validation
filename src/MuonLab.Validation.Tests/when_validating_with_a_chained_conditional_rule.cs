@@ -11,7 +11,7 @@ namespace MuonLab.Validation.Tests
 			var validator = new TestClassValidator();
 			var testClass = new TestClass(2, 2);
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("EqualTo");
 			validationReport.Violations.First().Error.Replacements["arg0"].Value.ShouldEqual("1");
@@ -25,7 +25,7 @@ namespace MuonLab.Validation.Tests
 			var validator = new TestClassValidator();
 			var testClass = new TestClass(1, 2);
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("EqualTo");
 			validationReport.Violations.First().Error.Replacements["arg0"].Value.ShouldEqual("3");

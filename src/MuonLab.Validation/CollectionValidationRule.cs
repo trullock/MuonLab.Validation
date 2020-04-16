@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace MuonLab.Validation
 {
@@ -14,7 +15,7 @@ namespace MuonLab.Validation
 			this.PropertyExpression = Expression.Lambda<Func<T, IList<TValue>>>(this.property, this.FindParameter(this.property));
 		}
 
-		public override IEnumerable<IViolation> Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix)
+		public override Task<IEnumerable<IViolation>> Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix)
 		{
 			var condition = this.validationExpression.Compile().Invoke(entity) as ICollectionCondition<TValue>;
 
@@ -24,7 +25,7 @@ namespace MuonLab.Validation
 
 			var propertyCondition = condition as PropertyCondition;
 
-			return expressions.Select(expression => this.CreateViolation(propertyCondition.ErrorKey, value, entity, expression)).ToArray();
+			return Task.FromResult(expressions.Select(expression => this.CreateViolation(propertyCondition.ErrorKey, value, entity, expression)).ToArray().AsEnumerable());
 		}
 
 		IViolation CreateViolation(string errorKey, IEnumerable<TValue> value, T entity, Expression property)

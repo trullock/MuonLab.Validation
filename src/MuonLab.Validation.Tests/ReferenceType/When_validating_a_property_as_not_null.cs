@@ -11,7 +11,7 @@ namespace MuonLab.Validation.Tests.ReferenceType
 			var validator = new TestClassValidator();
 			var testClass = new TestClass(new object());
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.IsValid.ShouldBeTrue();
 		}
@@ -22,7 +22,7 @@ namespace MuonLab.Validation.Tests.ReferenceType
 			var validator = new TestClassValidator();
 			var testClass = new TestClass(null);
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("Required");
 			validationReport.Violations.Skip(1).First().Error.Key.ShouldEqual("test key");

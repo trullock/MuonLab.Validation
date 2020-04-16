@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace MuonLab.Validation
 {
@@ -36,7 +37,7 @@ namespace MuonLab.Validation
 			this.PropertyExpression = Expression.Lambda<Func<T, IList<TValue>>>(this.property, findParameter(this.property));	
 		}
 
-		public IEnumerable<IViolation> Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix)
+		public async Task<IEnumerable<IViolation>> Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix)
 		{
 			// get the property value to be validated
 			var value = this.PropertyExpression.Compile().Invoke(entity);
@@ -69,12 +70,12 @@ namespace MuonLab.Validation
 				if (prefix != null)
 				{
 					var indexer = prefix.Combine(this.PropertyExpression.Combine(xs => xs[j], true), true);
-					report = validator.Validate(value[i], indexer);
+					report = await validator.Validate(value[i], indexer);
 				}
 				else
 				{
 					var indexer = this.PropertyExpression.Combine(xs => xs[j], true);
-					report = validator.Validate(value[i], indexer);
+					report = await validator.Validate(value[i], indexer);
 				}
 				
 				violations.AddRange(report.Violations);

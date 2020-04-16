@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace MuonLab.Validation
 {
@@ -15,14 +16,14 @@ namespace MuonLab.Validation
 			this.rules = rules;
 		}
 
-		IEnumerable<IViolation> IValidationRule<T>.Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix)
+		async Task<IEnumerable<IViolation>> IValidationRule<T>.Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix)
 		{
 			var violations1 = new List<IViolation>();
 
 			if (condition())
 			{
 				foreach (var crule in this.rules)
-					violations1.AddRange(crule.Validate(entity, prefix));
+					violations1.AddRange(await crule.Validate(entity, prefix));
 			}
 
 			return violations1;

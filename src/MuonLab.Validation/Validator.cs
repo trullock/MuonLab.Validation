@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace MuonLab.Validation
 {
@@ -26,25 +27,25 @@ namespace MuonLab.Validation
 			}
 		}
 
-		public virtual ValidationReport Validate(T entity)
+		public virtual Task<ValidationReport> Validate(T entity)
 		{
 			return Validate<object>(entity, null);
 		}
 
-		public virtual ValidationReport Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix)
+		public virtual async Task<ValidationReport> Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix)
 		{
 			var violations = new List<IViolation>();
 
 			foreach (var rule in this.ValidationRules)
 			{
-				var results = rule.Validate(entity, prefix);
+				var results = await rule.Validate(entity, prefix);
 				violations.AddRange(results);
 			}
 
 			return new ValidationReport(violations);
 		}
 
-		ValidationReport IValidator.Validate(object entity)
+		Task<ValidationReport> IValidator.Validate(object entity)
 		{
 			return Validate((T)entity);
 		}

@@ -16,7 +16,7 @@ namespace MuonLab.Validation.Tests.Enumerables
 
 			var testClassValidator = new TestClassValidator();
 
-			var validationReport = testClassValidator.Validate(testClass);
+			var validationReport = testClassValidator.Validate(testClass).Result;
 
 			validationReport.IsValid.ShouldBeFalse();
 

@@ -19,7 +19,7 @@ namespace MuonLab.Validation.Tests.Enumerables
 
 			var testClassValidator = new TestClassValidator();
 
-			var validationReport = testClassValidator.Validate(testClass);
+			var validationReport = testClassValidator.Validate(testClass).Result;
 
 			validationReport.IsValid.ShouldBeFalse();
 
@@ -64,7 +64,7 @@ namespace MuonLab.Validation.Tests.Enumerables
 
 			var outerTestClassValidator = new OuterTestClassValidator();
 
-			var validationReport = outerTestClassValidator.Validate(testContainer);
+			var validationReport = outerTestClassValidator.Validate(testContainer).Result;
 
 			validationReport.IsValid.ShouldBeFalse();
 
@@ -95,7 +95,7 @@ namespace MuonLab.Validation.Tests.Enumerables
 
 			var testClassValidator = new TestClassValidator();
 
-			var validationReport = testClassValidator.Validate(testClass);
+			var validationReport = testClassValidator.Validate(testClass).Result;
 
 			validationReport.IsValid.ShouldBeTrue();
 		}

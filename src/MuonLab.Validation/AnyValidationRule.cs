@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace MuonLab.Validation
 {
@@ -14,13 +15,14 @@ namespace MuonLab.Validation
 			this.rules = rules;
 		}
 
-		public IEnumerable<IViolation> Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix)
+		public async Task<IEnumerable<IViolation>> Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix)
 		{
 			var violations = new List<IViolation>();
 
+			// TODO: profile efficiency gains of parallelising this
 			foreach (var rule in this.rules)
 			{
-				var ruleViolations = rule.Validate(entity, prefix);
+				var ruleViolations = await rule.Validate(entity, prefix);
 				violations.AddRange(ruleViolations);
 
 				if(!ruleViolations.Any())

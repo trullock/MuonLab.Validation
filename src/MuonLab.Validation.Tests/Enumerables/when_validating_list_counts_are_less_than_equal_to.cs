@@ -13,7 +13,7 @@ namespace MuonLab.Validation.Tests.Enumerables
 
 			var validator = new LessThanOrEqualToValidator();
 
-			var report = validator.Validate(testClass);
+			var report = validator.Validate(testClass).Result;
 			report.IsValid.ShouldBeTrue();
 		}
 
@@ -26,7 +26,7 @@ namespace MuonLab.Validation.Tests.Enumerables
 
 			var validator = new LessThanOrEqualToValidator();
 
-			var report = validator.Validate(testClass);
+			var report = validator.Validate(testClass).Result;
 			report.IsValid.ShouldBeTrue();
 		}
 
@@ -40,7 +40,7 @@ namespace MuonLab.Validation.Tests.Enumerables
 
 			var validator = new LessThanOrEqualToValidator();
 
-			var report = validator.Validate(testClass);
+			var report = validator.Validate(testClass).Result;
 			report.IsValid.ShouldBeFalse();
 		}
 
@@ -53,7 +53,7 @@ namespace MuonLab.Validation.Tests.Enumerables
 
 			var validator = new LessThanOrEqualToWithPredicateValidator();
 
-			var report = validator.Validate(testClass);
+			var report = validator.Validate(testClass).Result;
 			report.IsValid.ShouldBeTrue();
 		}
 
@@ -67,7 +67,7 @@ namespace MuonLab.Validation.Tests.Enumerables
 
 			var validator = new LessThanOrEqualToWithPredicateValidator();
 
-			var report = validator.Validate(testClass);
+			var report = validator.Validate(testClass).Result;
 			report.IsValid.ShouldBeTrue();
 		}
 
@@ -82,7 +82,7 @@ namespace MuonLab.Validation.Tests.Enumerables
 
 			var validator = new LessThanOrEqualToWithPredicateValidator();
 
-			var report = validator.Validate(testClass);
+			var report = validator.Validate(testClass).Result;
 			report.IsValid.ShouldBeFalse();
 		}
 

@@ -34,7 +34,7 @@ namespace MuonLab.Validation.Tests
 
 			var validator = new OuterClassValidator();
 
-			var validationReport = validator.Validate(outerClass);
+			var validationReport = validator.Validate(outerClass).Result;
 
 			validationReport.IsValid.ShouldBeFalse();
 

@@ -12,7 +12,7 @@ namespace MuonLab.Validation.Tests.Exceptions
 			var validator = new TestClassValidator();
 			var testClass = new TestClass();
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			var errorDescriptor = validationReport.Violations.First().Error;
 			errorDescriptor.Key.ShouldEqual("ValidationError");

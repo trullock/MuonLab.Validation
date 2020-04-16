@@ -11,7 +11,7 @@ namespace MuonLab.Validation.Tests.IComparable
 			var validator = new TestClassValidator();
 			var testClass = new TestClass();
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.IsValid.ShouldBeTrue();
 		}

@@ -9,7 +9,7 @@ namespace MuonLab.Validation.Tests
 		public void the_validation_report_should_be_valid()
 		{
 			var validator = new TestValidator();
-			var report = validator.Validate(new TestClass { Age = 12 });
+			var report = validator.Validate(new TestClass { Age = 12 }).Result;
 			report.Violations.First().Error.Key.ShouldEqual("Key");
 		}
 

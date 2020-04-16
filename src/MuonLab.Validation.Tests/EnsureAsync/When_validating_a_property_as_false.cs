@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -12,7 +13,7 @@ namespace MuonLab.Validation.Tests.EnsureAsync
 			var validator = new TestClassValidator();
 			var testClass = new TestClass(false);
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.IsValid.ShouldBeTrue();
 		}
@@ -23,7 +24,7 @@ namespace MuonLab.Validation.Tests.EnsureAsync
 			var validator = new TestClassValidator();
 			var testClass = new TestClass(true);
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("BeFalse");
 		}
@@ -46,7 +47,8 @@ namespace MuonLab.Validation.Tests.EnsureAsync
 			}
 
 			async Task<bool> AsyncFalseCheck(bool b)
-			{
+            {
+                await Task.Delay(1);
 				return b == false;
 			}
 		}

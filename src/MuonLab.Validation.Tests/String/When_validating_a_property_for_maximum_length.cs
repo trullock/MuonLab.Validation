@@ -12,7 +12,7 @@ namespace MuonLab.Validation.Tests.String
 			var validator = new TestClassValidator();
 			var testClass = new TestClass(null);
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.IsValid.ShouldBeTrue();
 		}
@@ -23,7 +23,7 @@ namespace MuonLab.Validation.Tests.String
 			var validator = new TestClassValidator();
 			var testClass = new TestClass("123456");
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("MaxLength");
 			validationReport.Violations.First().Error.Replacements["arg0"].Value.ShouldEqual("5");
@@ -35,7 +35,7 @@ namespace MuonLab.Validation.Tests.String
 			var validator = new TestClassValidator();
 			var testClass = new TestClass("12345");
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.IsValid.ShouldBeTrue();
 		}
@@ -46,7 +46,7 @@ namespace MuonLab.Validation.Tests.String
 			var validator = new TestClassValidator();
 			var testClass = new TestClass("1234");
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.IsValid.ShouldBeTrue();
 		}

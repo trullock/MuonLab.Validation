@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace MuonLab.Validation
 {
@@ -18,7 +19,7 @@ namespace MuonLab.Validation
 			this.Condition = validationExpression.Body as MethodCallExpression;
 		}
 
-		public abstract IEnumerable<IViolation> Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix);
+		public abstract Task<IEnumerable<IViolation>> Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix);
 
 		protected ParameterExpression FindParameter(Expression expression)
 		{

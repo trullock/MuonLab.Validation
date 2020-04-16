@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace MuonLab.Validation
 {
@@ -16,13 +17,13 @@ namespace MuonLab.Validation
 			this.rules = rules;
 		}
 
-		public override IEnumerable<IViolation> Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix)
+		public override async Task<IEnumerable<IViolation>> Validate<TOuter>(T entity, Expression<Func<TOuter, T>> prefix)
 		{
 			var methodCallExpression = this.condition.Body as MethodCallExpression;
 			var genericTypeDefinition = methodCallExpression.Method.ReturnType.GetGenericTypeDefinition();
 			var rule = this.GetRule(genericTypeDefinition, methodCallExpression);
 
-			var violations = rule.Validate(entity, prefix);
+			var violations = await rule.Validate(entity, prefix);
 
 			// TODO: wtf? I dont understand why this seems backwards
 			if (violations.Any()) 
@@ -30,7 +31,7 @@ namespace MuonLab.Validation
 
 			var violations1 = new List<IViolation>();
 			foreach (var crule in this.rules)
-				violations1.AddRange(crule.Validate(entity, prefix));
+				violations1.AddRange(await crule.Validate(entity, prefix));
 			return violations1;
 		}
 

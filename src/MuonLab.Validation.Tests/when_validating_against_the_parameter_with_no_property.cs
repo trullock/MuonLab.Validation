@@ -9,7 +9,7 @@ namespace MuonLab.Validation.Tests
 		public void the_validation_report_should_be_invalid()
 		{
 			var validator = new TestValidator();
-			var report = validator.Validate(new TestClass());
+			var report = validator.Validate(new TestClass()).Result;
 			report.IsValid.ShouldBeFalse();
 		}
 

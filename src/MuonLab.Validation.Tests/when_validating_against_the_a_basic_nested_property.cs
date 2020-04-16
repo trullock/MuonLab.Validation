@@ -9,7 +9,7 @@ namespace MuonLab.Validation.Tests
 		public void the_validation_report_should_be_valid()
 		{
 			var validator = new TestClassWrapperValidator();
-			var report = validator.Validate(new TestClassWrapper());
+			var report = validator.Validate(new TestClassWrapper()).Result;
 			report.IsValid.ShouldBeTrue();
 		}
 

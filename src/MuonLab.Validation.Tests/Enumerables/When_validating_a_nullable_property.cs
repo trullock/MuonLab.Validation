@@ -11,7 +11,7 @@ namespace MuonLab.Validation.Tests.Enumerables
 			var validator = new TestClassValidator();
 			var testClass = new TestClass();
 
-			var report = validator.Validate(testClass);
+			var report = validator.Validate(testClass).Result;
 
 			report.IsValid.ShouldBeFalse();
 		}
@@ -26,7 +26,7 @@ namespace MuonLab.Validation.Tests.Enumerables
 				List = new[] {"an item"}
 			};
 
-			var report = validator.Validate(testClass);
+			var report = validator.Validate(testClass).Result;
 
 			report.IsValid.ShouldBeTrue();
 		}

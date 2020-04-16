@@ -9,21 +9,22 @@ namespace MuonLab.Validation
 	{
 		public static ICondition<TValue> Satisfies<TValue>(this TValue self, Func<TValue, bool> condition, string errorKey)
 		{
-			return new PropertyCondition<TValue>(condition, errorKey);
+			return new PropertyCondition<TValue>(v => Task.FromResult(condition(v)), errorKey);
 		}
 
 		public static ICondition<TValue> Satisfies<TValue>(this TValue self, Func<TValue, Task<bool>> condition, string errorKey)
 		{
-			return new PropertyCondition<TValue>(value => Task.Run(async () => await condition(value)).Result, errorKey);
+			return new PropertyCondition<TValue>(condition, errorKey);
 		}
+
 		public static ICondition<TValue> Satisfies<TValue>(this TValue self, Func<TValue, ConditionResult> condition)
 		{
-			return new PropertyCondition<TValue>(condition);
+			return new PropertyCondition<TValue>(v => Task.FromResult(condition(v)));
 		}
 
 		public static ICondition<TValue> Satisfies<TValue>(this TValue self, Func<TValue, Task<ConditionResult>> condition)
 		{
-			return new PropertyCondition<TValue>(value => Task.Run(async () => await condition(value)).Result);
+			return new PropertyCondition<TValue>(condition);
 		}
 
 		public static ChildValidationCondition<TValue> Satisfies<TValue>(this TValue self, IValidator<TValue> validator)

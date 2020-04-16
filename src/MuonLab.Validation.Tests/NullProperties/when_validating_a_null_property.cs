@@ -8,7 +8,7 @@ namespace MuonLab.Validation.Tests.NullProperties
 		public void the_validation_report_should_be_valid()
 		{
 			var validator = new TestClassValidator();
-			var report = validator.Validate(new TestClass());
+			var report = validator.Validate(new TestClass()).Result;
 			report.IsValid.ShouldBeTrue();
 		}
 

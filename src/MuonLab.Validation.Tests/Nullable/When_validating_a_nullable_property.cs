@@ -11,7 +11,7 @@ namespace MuonLab.Validation.Tests.Nullable
 			var validator = new TestClassValidator();
 			var testClass = new TestClass(false);
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("BeTrue");
 		}
@@ -22,7 +22,7 @@ namespace MuonLab.Validation.Tests.Nullable
 			var validator = new TestClassValidator();
 			var testClass = new TestClass(true);
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.IsValid.ShouldBeTrue();
 		}
@@ -33,7 +33,7 @@ namespace MuonLab.Validation.Tests.Nullable
 			var validator = new TestClassValidator();
 			var testClass = new TestClass(null);
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.IsValid.ShouldBeTrue();
 		}

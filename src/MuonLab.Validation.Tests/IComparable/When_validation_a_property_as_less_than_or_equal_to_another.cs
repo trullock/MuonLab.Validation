@@ -11,7 +11,7 @@ namespace MuonLab.Validation.Tests.IComparable
 			var validator = new TestClassValidator();
 			var testClass = new TestClass(1, 4);
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.IsValid.ShouldBeTrue();
 		}
@@ -22,7 +22,7 @@ namespace MuonLab.Validation.Tests.IComparable
 			var validator = new TestClassValidator();
 			var testClass = new TestClass(4, 1);
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.Violations.First().Error.Key.ShouldEqual("LessThanEq");
 			validationReport.Violations.First().Error.Replacements["arg0"].Value.ToString().ShouldEqual("x.Value2");
@@ -34,7 +34,7 @@ namespace MuonLab.Validation.Tests.IComparable
 			var validator = new TestClassValidator();
 			var testClass = new TestClass(2, 2);
 
-			var validationReport = validator.Validate(testClass);
+			var validationReport = validator.Validate(testClass).Result;
 
 			validationReport.IsValid.ShouldBeTrue();
 		}
